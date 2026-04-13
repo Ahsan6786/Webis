@@ -20,7 +20,6 @@ export function useTheme() {
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("webis-theme") as Theme | null;
@@ -28,7 +27,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const initial = saved ?? (prefersDark ? "dark" : "light");
     setTheme(initial);
     document.documentElement.setAttribute("data-theme", initial);
-    setMounted(true);
   }, []);
 
   const toggleTheme = () => {
@@ -37,8 +35,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("webis-theme", next);
     document.documentElement.setAttribute("data-theme", next);
   };
-
-  if (!mounted) return null;
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
