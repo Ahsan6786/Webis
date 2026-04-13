@@ -54,6 +54,10 @@
   --nav-bg: rgba(5, 5, 16, 0.92);
   --nav-border: rgba(124, 58, 237, 0.15);
 
+  /* Hero */
+  --hero-bg-image:    radial-gradient(ellipse 110% 70% at 20% 10%, rgba(160,40,200,0.20) 0%, transparent 55%), radial-gradient(ellipse 90% 60% at 80% 8%, rgba(200,40,140,0.16) 0%, transparent 50%), linear-gradient(155deg, #0e0619 0%, #100520 45%, #0c0418 75%, #080316 100%);
+  --hero-vignette:    rgba(11,6,20,0.97);
+
   /* Hero canvas hints — bumped up for brighter stars & nebula */
   --blob-opacity: 0.55;
   --grid-opacity: 0.028;
@@ -63,44 +67,48 @@
    LIGHT THEME  (keep for toggle compatibility)
 ═══════════════════════════════════════════════════════════ */
 [data-theme="light"] {
-  --bg-primary: #fdf8f2;
-  --bg-surface: #f8f0e8;
+  --bg-primary: #f3f3eb;
+  --bg-surface: #eaeadd;
   --bg-card: #fffdf9;
   --bg-card-hover: #fef9f3;
   --bg-input: rgba(120, 80, 20, 0.06);
 
   /* Brand — warm amber / orange */
-  --brand-purple:     #c2600a;
-  --brand-blue:       #b45309;
-  --brand-orange:     #ea580c;
-  --brand-pink:       #b91c1c;
+  --brand-purple: #c2600a;
+  --brand-blue: #b45309;
+  --brand-orange: #ea580c;
+  --brand-pink: #b91c1c;
 
-  --gradient-brand:   linear-gradient(135deg, #c2600a, #ea580c);
-  --gradient-cta:     linear-gradient(135deg, #c2600a, #ea580c 60%, #f59e0b);
-  --gradient-text:    linear-gradient(135deg, #c2600a, #f59e0b);
+  --gradient-brand: linear-gradient(135deg, #c2600a, #ea580c);
+  --gradient-cta: linear-gradient(135deg, #c2600a, #ea580c 60%, #f59e0b);
+  --gradient-text: linear-gradient(135deg, #c2600a, #f59e0b);
 
-  --glow-purple:      rgba(194, 96, 10, 0.15);
-  --glow-blue:        rgba(180, 83, 9, 0.10);
-  --glow-orange:      rgba(234, 88, 12, 0.15);
-  --brand-glow-b:     rgba(180, 83, 9, 0.10);
-  --brand-glow-p:     rgba(194, 96, 10, 0.12);
-  --brand-indigo:     #d97706;
+  --glow-purple: rgba(194, 96, 10, 0.15);
+  --glow-blue: rgba(180, 83, 9, 0.10);
+  --glow-orange: rgba(234, 88, 12, 0.15);
+  --brand-glow-b: rgba(180, 83, 9, 0.10);
+  --brand-glow-p: rgba(194, 96, 10, 0.12);
+  --brand-indigo: #d97706;
 
-  --text-primary:     #1c0f00;
-  --text-secondary:   #6b4226;
-  --text-muted:       #a87650;
-  --text-invert:      #ffffff;
+  --text-primary: #1c0f00;
+  --text-secondary: #6b4226;
+  --text-muted: #a87650;
+  --text-invert: #ffffff;
 
-  --border-subtle:    rgba(160, 80, 10, 0.10);
-  --border-accent:    rgba(194, 96, 10, 0.30);
-  --border-input:     rgba(120, 60, 0, 0.12);
+  --border-subtle: rgba(160, 80, 10, 0.10);
+  --border-accent: rgba(194, 96, 10, 0.30);
+  --border-input: rgba(120, 60, 0, 0.12);
 
-  --shadow-card:      0 4px 32px rgba(120, 60, 0, 0.08), 0 1px 4px rgba(120, 60, 0, 0.05);
-  --shadow-glow:      0 0 40px rgba(194, 96, 10, 0.12);
-  --shadow-btn:       0 4px 20px rgba(194, 96, 10, 0.30);
+  --shadow-card: 0 4px 32px rgba(120, 60, 0, 0.08), 0 1px 4px rgba(120, 60, 0, 0.05);
+  --shadow-glow: 0 0 40px rgba(194, 96, 10, 0.12);
+  --shadow-btn: 0 4px 20px rgba(194, 96, 10, 0.30);
 
-  --nav-bg:           rgba(253, 248, 242, 0.95);
-  --nav-border:       rgba(160, 80, 10, 0.10);
+  --nav-bg: rgba(253, 248, 242, 0.95);
+  --nav-border: rgba(160, 80, 10, 0.10);
+
+  /* Hero */
+  --hero-bg-image:    radial-gradient(ellipse 110% 70% at 20% 10%, rgba(255,200,140,0.18) 0%, transparent 55%), radial-gradient(ellipse 90% 60% at 80% 8%, rgba(255,180,100,0.12) 0%, transparent 50%);
+  --hero-vignette:    rgba(243,243,235,0.6);
 
   --blob-opacity: 0.12;
   --grid-opacity: 0.03;
