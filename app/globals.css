@@ -63,11 +63,11 @@
    LIGHT THEME  (keep for toggle compatibility)
 ═══════════════════════════════════════════════════════════ */
 [data-theme="light"] {
-  --bg-primary:       #f5f4ff;
-  --bg-surface:       #eeeeff;
-  --bg-card:          #ffffff;
-  --bg-card-hover:    #f9f8ff;
-  --bg-input:         rgba(0,0,0,0.04);
+  --bg-primary:       #fdf8f2;
+  --bg-surface:       #f8f0e8;
+  --bg-card:          #fffdf9;
+  --bg-card-hover:    #fef9f3;
+  --bg-input:         rgba(120,80,20,0.05);
 
   --brand-purple:     #6d28d9;
   --brand-blue:       #1d4ed8;
@@ -98,15 +98,16 @@
   --shadow-glow:      0 0 40px rgba(109, 40, 217, 0.1);
   --shadow-btn:       0 4px 20px rgba(109, 40, 217, 0.3);
 
-  --nav-bg:           rgba(245, 244, 255, 0.92);
-  --nav-border:       rgba(0, 0, 0, 0.07);
+  --nav-bg:           rgba(253, 248, 242, 0.94);
+  --nav-border:       rgba(120, 80, 20, 0.09);
 
   --blob-opacity:     0.12;
   --grid-opacity:     0.03;
 }
 
 [data-theme="light"] body {
-  background-image: none !important;
+  background-image: radial-gradient(ellipse 100% 60% at 20% 10%, rgba(255,220,160,0.18) 0%, transparent 60%),
+                    radial-gradient(ellipse 80% 50% at 80% 90%, rgba(255,200,140,0.12) 0%, transparent 55%) !important;
   background-color: var(--bg-primary) !important;
 }
 
