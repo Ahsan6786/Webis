@@ -6,14 +6,18 @@ import Link from "next/link";
 import Image from "next/image";
 import Magnetic from "@/components/animations/Magnetic";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LayoutDashboard, Briefcase, Users, CreditCard, MessageSquare, Link2, Camera, Send, Mail, ArrowRight } from "lucide-react";
+
+const InstagramIcon = ({ size = 20 }: { size?: number }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+);
 
 const navLinks = [
-  { label: "Services",  href: "/#services" },
-  { label: "Portfolio", href: "/#portfolio" },
-  { label: "Team",      href: "/team"      },
-  { label: "Pricing",   href: "/#pricing"  },
-  { label: "Contact",   href: "/#contact"  },
+  { label: "Services",  href: "/#services",  icon: LayoutDashboard },
+  { label: "Portfolio", href: "/#portfolio", icon: Briefcase },
+  { label: "Team",      href: "/team",       icon: Users },
+  { label: "Pricing",   href: "/#pricing",    icon: CreditCard },
+  { label: "Contact",   href: "/#contact",    icon: MessageSquare },
 ];
 
 export default function Navbar() {
@@ -156,82 +160,130 @@ export default function Navbar() {
         </div>
       </motion.header>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Sidebar */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "spring", damping: 30, stiffness: 200 }}
-            style={{
-              position: "fixed", top: 0, right: 0, bottom: 0, 
-              width: "min(320px, 85vw)", 
-              zIndex: 100,
-              background: "var(--bg-card)",
-              borderLeft: "1px solid var(--border-subtle)",
-              boxShadow: "-10px 0 40px rgba(0,0,0,0.1)",
-              backdropFilter: "blur(24px)",
-              overflow: "hidden", willChange: "transform, opacity",
-              display: "flex", flexDirection: "column"
-            }}
-          >
-            {/* Header / Brand */}
-            <div style={{ padding: "1.25rem 1.5rem", borderBottom: "1px solid var(--border-subtle)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <div style={{ position: "relative", width: "28px", height: "28px" }}>
-                  <Image 
-                    src="/logo.png" 
-                    alt="Webis Digital Agency Logo" 
-                    fill
-                    style={{ objectFit: "contain" }}
-                    priority
-                  />
-                </div>
-                <span style={{ fontWeight: 800, fontSize: "1.2rem", letterSpacing: "-0.02em", color: "var(--text-primary)" }}>Webis</span>
-              </div>
-              <button 
-                onClick={() => setMobileOpen(false)}
-                style={{ width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%", background: "var(--bg-input)", border: "none", color: "var(--text-primary)", cursor: "pointer" }}
-              >
-                <X size={18} />
-              </button>
-            </div>
-
-            <nav style={{ display: "flex", flexDirection: "column", padding: "1.5rem", gap: "0.5rem", flex: 1 }}>
-              {navLinks.map((link, i) => (
-                <motion.div 
-                  key={link.label} 
-                  initial={{ opacity: 0, x: 20 }} 
-                  animate={{ opacity: 1, x: 0 }} 
-                  transition={{ 
-                    delay: 0.1 + i * 0.05, 
-                    duration: 0.3,
-                    ease: "easeOut"
-                  }}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    style={{ 
-                      display: "flex", alignItems: "center", padding: "1rem", borderRadius: "100px", 
-                      fontSize: "1.1rem", fontWeight: 700, 
-                      color: "var(--text-primary)", 
-                      textDecoration: "none", transition: "all 0.2s",
-                      position: "relative", overflow: "hidden"
-                    }}
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileOpen(false)}
+              style={{
+                position: "fixed",
+                inset: 0,
+                background: "rgba(0,0,0,0.4)",
+                backdropFilter: "blur(8px)",
+                zIndex: 90
+              }}
+            />
             
-            {/* Soft Branding Bottom */}
-            <div style={{ padding: "1.5rem", fontSize: "0.75rem", color: "var(--text-muted)", textAlign: "center", opacity: 0.6 }}>
-              © 2026 Webis Agency
-            </div>
-          </motion.div>
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              style={{
+                position: "fixed", top: 0, right: 0, bottom: 0, 
+                width: "min(380px, 90vw)", 
+                zIndex: 100,
+                background: "var(--bg-card)",
+                borderLeft: "1px solid var(--border-subtle)",
+                boxShadow: "-10px 0 60px rgba(0,0,0,0.3)",
+                backdropFilter: "blur(40px) saturate(180%)",
+                overflow: "hidden", 
+                display: "flex", flexDirection: "column"
+              }}
+            >
+              {/* Premium Background Mesh */}
+              <div style={{ position: "absolute", inset: 0, zIndex: -1, opacity: 0.4 }}>
+                <div style={{ position: "absolute", top: "-10%", right: "-10%", width: "70%", height: "40%", background: "radial-gradient(circle, var(--brand-purple) 0%, transparent 70%)", filter: "blur(60px)" }} />
+                <div style={{ position: "absolute", bottom: "10%", left: "-10%", width: "60%", height: "40%", background: "radial-gradient(circle, var(--brand-blue) 0%, transparent 70%)", filter: "blur(60px)" }} />
+              </div>
+
+              {/* Header */}
+              <div style={{ padding: "1.75rem 2rem", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <div style={{ position: "relative", width: "32px", height: "32px" }}>
+                    <Image src="/logo.png" alt="Logo" fill style={{ objectFit: "contain" }} priority />
+                  </div>
+                  <span style={{ fontWeight: 800, fontSize: "1.4rem", letterSpacing: "-0.03em", color: "var(--text-primary)" }}>Webis</span>
+                </div>
+                <motion.button 
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setMobileOpen(false)}
+                  style={{ width: "38px", height: "38px", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "100px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--text-primary)", cursor: "pointer" }}
+                >
+                  <X size={20} />
+                </motion.button>
+              </div>
+
+              {/* Navigation Links */}
+              <nav style={{ display: "flex", flexDirection: "column", padding: "2rem 1.5rem", gap: "0.75rem", flex: 1 }}>
+                <div style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--text-muted)", opacity: 0.5, letterSpacing: "0.1em", textTransform: "uppercase", paddingLeft: "1rem", marginBottom: "0.5rem" }}>
+                  Navigation
+                </div>
+                {navLinks.map((link, i) => (
+                  <motion.div 
+                    key={link.label} 
+                    initial={{ opacity: 0, x: 30, rotateX: -15 }} 
+                    animate={{ opacity: 1, x: 0, rotateX: 0 }} 
+                    transition={{ delay: 0.1 + i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      style={{ 
+                        display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 1.25rem", borderRadius: "16px", 
+                        fontSize: "1.15rem", fontWeight: 600, 
+                        color: "var(--text-primary)", textDecoration: "none", transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+                        background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.03)"
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+                        e.currentTarget.style.transform = "translateX(8px)";
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                        e.currentTarget.style.transform = "translateX(0)";
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.03)";
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}>
+                        <div style={{ width: "40px", height: "40px", borderRadius: "12px", background: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid rgba(255,255,255,0.05)" }}>
+                          <link.icon size={20} strokeWidth={1.5} />
+                        </div>
+                        {link.label}
+                      </div>
+                      <ArrowRight size={16} style={{ opacity: 0.3 }} />
+                    </Link>
+                  </motion.div>
+                ))}
+              </nav>
+              
+              {/* Footer Section: Socials & Contact */}
+              <div style={{ padding: "2rem", borderTop: "1px solid rgba(255,255,255,0.05)", background: "rgba(0,0,0,0.05)" }}>
+                <div style={{ display: "flex", justifyContent: "center", gap: "1rem", marginBottom: "1.5rem" }}>
+                  {[Link2, InstagramIcon, Send, Mail].map((Icon, idx) => (
+                    <motion.a 
+                      key={idx}
+                      href="#"
+                      whileHover={{ y: -5, background: "rgba(255,255,255,0.1)" }}
+                      style={{ width: "45px", height: "45px", borderRadius: "100px", border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-primary)", transition: "all 0.3s" }}
+                    >
+                      <Icon size={20} />
+                    </motion.a>
+                  ))}
+                </div>
+                <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", textAlign: "center", opacity: 0.4 }}>
+                  © 2026 Webis Agency • Premium Digital Solutions
+                </p>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

@@ -3,10 +3,14 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Link2 } from "lucide-react";
+import { ArrowRight, Link2, Camera, Send, CircleCheck } from "lucide-react";
 import { teamMembers } from "@/lib/data";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SectionHeading from "@/components/ui/SectionHeading";
+
+const InstagramIcon = ({ size = 20 }: { size?: number }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+);
 
 export default function TeamPreview() {
   return (
@@ -76,25 +80,25 @@ export default function TeamPreview() {
                   {member.bio.split(". ")[0]}.
                 </p>
 
-                <div style={{ display: "flex", justifyContent: "center", gap: "1.25rem" }}>
+                <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
                   {member.social.linkedin && (
-                    <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer" style={{ opacity: 0.7, transition: "opacity 0.2s", position: "relative", width: "20px", height: "20px" }} onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")} onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}>
-                      <Image src="/linkedin.png" alt="LinkedIn" width={20} height={20} />
+                    <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "36px", height: "36px", borderRadius: "10px", background: "rgba(255,255,255,0.05)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "var(--brand-primary)"; e.currentTarget.style.color = "white"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.color = "var(--text-secondary)"; }}>
+                      <Link2 size={18} strokeWidth={1.5} />
                     </a>
                   )}
                   {member.social.instagram && (
-                    <a href={member.social.instagram} target="_blank" rel="noopener noreferrer" style={{ opacity: 0.7, transition: "opacity 0.2s", position: "relative", width: "20px", height: "20px" }} onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")} onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}>
-                      <Image src="/insta.png" alt="Instagram" width={20} height={20} />
+                    <a href={member.social.instagram} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "36px", height: "36px", borderRadius: "10px", background: "rgba(255,255,255,0.05)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)"; e.currentTarget.style.color = "white"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.color = "var(--text-secondary)"; }}>
+                      <InstagramIcon size={18} />
                     </a>
                   )}
                   {member.social.portfolio && (
-                    <a href={member.social.portfolio} target="_blank" rel="noopener noreferrer" style={{ opacity: 0.7, transition: "opacity 0.2s", position: "relative", width: "20px", height: "20px" }} onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")} onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}>
-                      <Image src="/portfolio.png" alt="Portfolio" width={20} height={20} />
+                    <a href={member.social.portfolio} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "36px", height: "36px", borderRadius: "10px", background: "rgba(255,255,255,0.05)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "var(--brand-primary)"; e.currentTarget.style.color = "white"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.color = "var(--text-secondary)"; }}>
+                      <Link2 size={18} strokeWidth={1.5} />
                     </a>
                   )}
                   {member.social.facebook && (
-                    <a href={member.social.facebook} target="_blank" rel="noopener noreferrer" style={{ opacity: 0.7, transition: "opacity 0.2s", position: "relative", width: "20px", height: "20px" }} onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")} onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}>
-                      <Image src="/facebook.png" alt="Facebook" width={20} height={20} />
+                    <a href={member.social.facebook} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "36px", height: "36px", borderRadius: "10px", background: "rgba(255,255,255,0.05)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "#1877F2"; e.currentTarget.style.color = "white"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.color = "var(--text-secondary)"; }}>
+                      <CircleCheck size={18} strokeWidth={1.5} />
                     </a>
                   )}
                 </div>

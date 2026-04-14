@@ -25,6 +25,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${project.title} — Webis Portfolio`,
     description: project.description,
+    alternates: {
+      canonical: `/portfolio/${slug}`,
+    },
+    openGraph: {
+      title: `${project.title} | Webis`,
+      description: project.description,
+      url: `https://webiss.shop/portfolio/${slug}`,
+      images: [
+        {
+          url: project.image || "/og-image.png",
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
   };
 }
 

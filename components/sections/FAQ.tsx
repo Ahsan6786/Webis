@@ -83,7 +83,7 @@ function FAQItem({ faq, isOpen, onClick }: { faq: typeof faqs[0], isOpen: boolea
 }
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number>(0);
+  const [openIndex, setOpenIndex] = useState<number>(-1);
 
   return (
     <section id="faq" style={{ background: "var(--bg-primary)", position: "relative", padding: "7rem 0 4rem", contain: "paint" }}>

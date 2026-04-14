@@ -289,6 +289,21 @@ export default function Hero() {
           Webis &mdash; The New Standard
         </motion.div>
 
+        {/* Visually hidden SEO keywords for Google indexing */}
+        <h2 style={{ 
+          position: "absolute", 
+          width: "1px", 
+          height: "1px", 
+          padding: "0", 
+          margin: "-1px", 
+          overflow: "hidden", 
+          clip: "rect(0, 0, 0, 0)", 
+          whiteSpace: "nowrap", 
+          borderWidth: "0" 
+        }}>
+          Best website developer in Pune, top website maker in India, premium web development agency in Pune.
+        </h2>
+
         {/* Typewriter Headline */}
         <motion.div {...fadeUp(0)}>
           <h1

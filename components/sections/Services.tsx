@@ -77,9 +77,7 @@ function TimelineCard({ service, i }: { service: typeof services[0]; i: number }
           />
 
           <div style={{ position: "relative", zIndex: 2 }}>
-            <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase" }}>
-              PHASE 0{i + 1}
-            </span>
+
 
             <h3 style={{ fontWeight: 800, fontSize: "1.4rem", color: "var(--text-primary)", marginTop: "0.5rem", letterSpacing: "-0.02em" }}>
               {service.title}
@@ -116,12 +114,26 @@ export default function Services() {
     >
       <div style={{ maxWidth: "1320px", margin: "0 auto", padding: "0 1.5rem" }}>
         <SectionHeading
-          label="Roadmap"
           title="Services Designed to"
           titleHighlight="Convert"
-          subtitle="Follow our proven roadmap from business branding to full-scale web applications."
+          subtitle="Follow our proven process from business branding to full-scale web applications."
           align="center"
         />
+        
+        {/* Visually hidden SEO keywords for Google indexing */}
+        <div style={{ 
+          position: "absolute", 
+          width: "1px", 
+          height: "1px", 
+          padding: "0", 
+          margin: "-1px", 
+          overflow: "hidden", 
+          clip: "rect(0, 0, 0, 0)", 
+          whiteSpace: "nowrap", 
+          borderWidth: "0" 
+        }}>
+          Best web development agency in Pune, web development services India, top website maker Pune.
+        </div>
 
         <div className="relative max-w-5xl mx-auto mt-16">
           {/* Timeline line */}

@@ -321,9 +321,9 @@ export const teamMembers = [
     qualities: ["Innovation", "Full-Stack Mastery", "Strategic Vision"],
     social: { 
       linkedin: "https://www.linkedin.com/in/ahsan-imam-khan-9a0443328/", 
-      instagram: "https://www.linkedin.com/in/ahsan-imam-khan-9a0443328/", 
+      instagram: "https://www.instagram.com/khan_ahsan_8055?igsh=MWhpYnJ1OGo2Y214ZA%3D%3D&utm_source=qr", 
       portfolio: "https://www.ahsanimamkhan.online/",
-      facebook: "https://www.ahsanimamkhan.online/"
+      facebook: "https://www.facebook.com/share/1ENMcrDdG5/?mibextid=wwXIfr"
     }
   },
   {
@@ -335,14 +335,14 @@ export const teamMembers = [
     qualities: ["Technical Logic", "Performance", "Scalability"],
     social: { 
       linkedin: "https://www.linkedin.com/in/navneet-kumar-03b97735a/",
-      instagram: "#" // Placeholder for Instagram as no link was provided
+      instagram: "https://www.instagram.com/kumar_nav8?igsh=eGxkcWQ4OThtYXM0"
     }
   },
   {
     id: "akshat",
     name: "Akshat Raj",
     role: "Sponsor & Advertisement",
-    photo: "/akshat.png",
+    photo: "/akshat.png?v=2",
     bio: "The growth strategist driving Webis's global visibility. Akshat ensures our brand reached the right audience through high-impact marketing and strategic sponsorship initiatives.",
     qualities: ["Growth Hacking", "Partnerships", "Public Relations"],
     social: { 
