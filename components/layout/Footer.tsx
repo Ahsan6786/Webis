@@ -12,7 +12,6 @@ const footerLinks = {
     { label: "Custom Web Apps",  href: "/#services" },
   ],
   Company: [
-    { label: "Blog",         href: "/blog"      },
     { label: "Portfolio",    href: "/#portfolio" },
     { label: "Pricing",     href: "/#pricing"   },
     { label: "Why Webis",   href: "/#why"       },
@@ -119,16 +118,6 @@ export default function Footer() {
             © {new Date().getFullYear()} Webis. Made with <Heart size={12} color="#ea580c" fill="#ea580c" /> in Pune, India.
           </p>
           <div style={{ display: "flex", gap: "1.5rem" }}>
-            <Link href="/privacy" style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.4)", textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#ea580c"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.4)"; }}>
-                Privacy Policy
-            </Link>
-            <Link href="/terms" style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.4)", textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#ea580c"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.4)"; }}>
-                Terms of Service
-            </Link>
           </div>
         </div>
       </div>
