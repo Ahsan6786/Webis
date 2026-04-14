@@ -56,7 +56,7 @@ export default function Testimonials() {
         </ScrollReveal>
 
         <div style={{ maxWidth: "800px", margin: "0 auto" }} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-          <div style={{ position: "relative", minHeight: "320px" }}>
+          <div style={{ position: "relative", height: "460px", display: "flex", alignItems: "center" }}>
             <AnimatePresence custom={direction} mode="wait">
               <motion.div
                 key={t.id}
@@ -74,9 +74,13 @@ export default function Testimonials() {
                   borderRadius: "24px",
                   padding: "3rem",
                   textAlign: "center",
-                  display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem",
+                  display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "1.5rem",
                   userSelect: "none", willChange: "transform, opacity, box-shadow",
                   boxShadow: "0 4px 16px rgba(0,0,0,0.04)",
+                  height: "100%",
+                  width: "100%",
+                  position: "absolute",
+                  inset: 0
                 }}
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}

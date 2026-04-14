@@ -49,8 +49,8 @@ export default function GalaxyCanvas() {
 
     const initStars = () => {
       const isMobile = window.innerWidth < 768;
-      const baseDensity = isMobile ? 10000 : 6000;
-      const count = Math.min(isMobile ? 120 : 250, Math.floor((canvas.width * canvas.height) / baseDensity));
+      const baseDensity = isMobile ? 5000 : 2800; // Even more stars
+      const count = Math.min(isMobile ? 300 : 650, Math.floor((canvas.width * canvas.height) / baseDensity));
       
       stars = Array.from({ length: count }, () => {
         const tintRoll = Math.random();
@@ -58,9 +58,9 @@ export default function GalaxyCanvas() {
         return {
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() > 0.95 ? 2 : 1, // Rarer large stars
-          baseOpacity: Math.random() * 0.5 + 0.2,
-          twinkleSpeed: Math.random() * 0.03 + 0.01,
+          size: Math.random() > 0.93 ? (Math.random() > 0.5 ? 2 : 1.5) : 1, // More varied and larger stars
+          baseOpacity: Math.random() * 0.7 + 0.4, // Brighter base opacity
+          twinkleSpeed: Math.random() * 0.04 + 0.015,
           twinklePhase: Math.random() * Math.PI * 2,
           tint: tintRoll < 0.6 ? 0 : tintRoll < 0.85 ? 1 : 2,
           layer: layerRoll < 0.6 ? 1 : layerRoll < 0.9 ? 2 : 3,
@@ -135,7 +135,7 @@ export default function GalaxyCanvas() {
         }
 
         const twinkle = (Math.sin(t * star.twinkleSpeed + star.twinklePhase) + 1) / 2;
-        const alpha = star.baseOpacity * (0.2 + twinkle * 0.8);
+        const alpha = star.baseOpacity * (0.45 + twinkle * 0.55); // Higher min visibility
 
         const x = Math.round(star.x);
         const y = Math.round(star.y);

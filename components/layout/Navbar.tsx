@@ -3,12 +3,15 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import Magnetic from "@/components/animations/Magnetic";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Services",  href: "/#services" },
   { label: "Portfolio", href: "/#portfolio" },
+  { label: "Team",      href: "/team"      },
   { label: "Pricing",   href: "/#pricing"  },
   { label: "Contact",   href: "/#contact"  },
 ];
@@ -78,20 +81,21 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: "0.625rem", textDecoration: "none" }}>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }} style={{ display: "flex", alignItems: "center", gap: "0.625rem", willChange: "transform" }}>
-              <div
-                style={{
-                  width: "36px", height: "36px", 
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  overflow: "hidden", position: "relative",
-                }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src="/logo.png" 
-                  alt="Webis Digital Agency - Premium Web Development Logo" 
-                  style={{ width: "100%", height: "100%", objectFit: "contain" }} 
-                />
-              </div>
+                <div
+                  style={{
+                    width: "36px", height: "36px", 
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    position: "relative",
+                  }}
+                >
+                  <Image 
+                    src="/logo.png" 
+                    alt="Webis Digital Agency Logo" 
+                    fill
+                    style={{ objectFit: "contain" }}
+                    priority
+                  />
+                </div>
               <span style={{ fontWeight: 800, fontSize: "1.1rem", color: scrolled ? "var(--text-primary)" : "#fff", letterSpacing: "-0.02em" }}>Webis</span>
             </motion.div>
           </Link>
@@ -175,7 +179,15 @@ export default function Navbar() {
             {/* Header / Brand */}
             <div style={{ padding: "1.25rem 1.5rem", borderBottom: "1px solid var(--border-subtle)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <img src="/logo.png" alt="Webis Digital Agency Logo" style={{ width: "28px", height: "28px", objectFit: "contain" }} />
+                <div style={{ position: "relative", width: "28px", height: "28px" }}>
+                  <Image 
+                    src="/logo.png" 
+                    alt="Webis Digital Agency Logo" 
+                    fill
+                    style={{ objectFit: "contain" }}
+                    priority
+                  />
+                </div>
                 <span style={{ fontWeight: 800, fontSize: "1.2rem", letterSpacing: "-0.02em", color: "var(--text-primary)" }}>Webis</span>
               </div>
               <button 

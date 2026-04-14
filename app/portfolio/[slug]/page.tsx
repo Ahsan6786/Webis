@@ -8,6 +8,7 @@ import {
 import { projects } from "@/lib/data";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Image from "next/image";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -53,9 +54,15 @@ export default async function ProjectPage({ params }: PageProps) {
         {/* Hero banner */}
         {project.image ? (
           <div className="w-full flex justify-center bg-transparent mt-12 mb-8 px-4 sm:px-8">
-            <div className="w-full max-w-[1100px] rounded-xl sm:rounded-2xl overflow-hidden" style={{ boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)", border: "1px solid var(--border-subtle)" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={project.image} alt={project.title} style={{ display: "block", width: "100%", height: "auto", margin: 0 }} />
+            <div className="w-full max-w-[1100px] rounded-xl sm:rounded-2xl overflow-hidden relative" style={{ boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)", border: "1px solid var(--border-subtle)", aspectRatio: "16/9" }}>
+              <Image 
+                src={project.image} 
+                alt={project.title} 
+                fill
+                style={{ objectFit: "cover" }}
+                priority
+                sizes="1100px"
+              />
             </div>
           </div>
         ) : (
@@ -183,13 +190,13 @@ export default async function ProjectPage({ params }: PageProps) {
                         : (i + 1).toString();
                       
                       return (
-                        <div key={i} className="w-full relative m-0 p-0 leading-none flex border-none">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img 
+                        <div key={i} className="w-full relative m-0 p-0 leading-none flex border-none" style={{ aspectRatio: "1920/1080" }}>
+                          <Image 
                             src={`${project.mockupConfig?.folder}/${project.mockupConfig?.prefix}${fileName}${project.mockupConfig?.suffix}`} 
                             alt={`${project.title} Experience Part ${i + 1}`} 
-                            className="w-full h-auto block select-none m-0 p-0 border-none outline-none align-bottom"
-                            loading="lazy"
+                            fill
+                            style={{ objectFit: "cover" }}
+                            sizes="1100px"
                           />
                         </div>
                       );

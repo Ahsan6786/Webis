@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Camera, Send, Link2, GitBranch, ArrowUpRight, Heart } from "lucide-react";
 
 const footerLinks = {

@@ -348,7 +348,7 @@ export default function Hero() {
             letterSpacing: "-0.01em"
           }}
         >
-          We architect lightning-fast digital solutions that turn global visitors into brand advocates. High performance, zero compromise.
+          We architect lightning-fast digital solutions that turn global visitors into brand advocates. <strong>Book a free consultation</strong> about your idea today.
         </motion.p>
 
         {/* CTA — fade */}
@@ -388,7 +388,7 @@ export default function Hero() {
               whileTap={{ scale: 0.98 }}
             >
               <span style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                Get Started <ArrowRight size={20} />
+                Book Free Consultation <ArrowRight size={20} />
               </span>
             </motion.a>
           </Magnetic>

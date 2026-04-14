@@ -164,7 +164,7 @@ export const testimonials = [
     name: "Harsh Vardhan",
     role: "Founder, Blingish",
     content:
-      "Webis didn't just build a website; they crafted a high-end digital flagship for Blingish. Their ability to translate premium brand values into a technical reality is unmatched. Our conversion rates and brand perception have skyrocketed since launch.",
+      "Webis didn't just build a website; they crafted a high-end digital flagship for Blingish. Their ability to translate premium brand values into technical reality is unmatched. Our conversion rates have skyrocketed since launch.",
     rating: 5,
     initials: "HV",
     gradient: "from-amber-400 to-orange-500",
@@ -174,7 +174,7 @@ export const testimonials = [
     name: "Ziya Murad Khan",
     role: "Proprietor, Daily Greens",
     content:
-      "The Webis team immediately understood my requirements and delivered a clean, professional website exactly as needed. Their response time and technical execution made the entire process seamless.",
+      "The Webis team immediately understood our vision and delivered a clean, professional website exactly as needed. Their rapid response time and technical execution made the entire process seamless and results-driven for us.",
     rating: 5,
     initials: "UH",
     gradient: "from-rose-400 to-pink-500",
@@ -184,7 +184,7 @@ export const testimonials = [
     name: "Yassh Agarwal",
     role: "Fitness Professional",
     content:
-      "Webis understood what I needed with very little conversation and delivered exactly the website I had in mind. Highly efficient and result-oriented agency.",
+      "Webis understood exactly what I needed with very little conversation and delivered a perfect website. They are a highly efficient and result-oriented agency that I would recommend to any growing business.",
     rating: 5,
     initials: "ZK",
     gradient: "from-violet-400 to-indigo-500",
@@ -194,7 +194,7 @@ export const testimonials = [
     name: "Dr. Vaishali Imam",
     role: "Pediatrician",
     content:
-      "Webis did an exceptional job in bringing my vision to life. They built the website exactly the way I wanted—clean, modern, and highly functional. Their attention to detail and willingness to accommodate every request truly set them apart. I’m extremely satisfied and highly recommend Webis for anyone looking for a reliable and talented team.",
+      "Webis did an exceptional job bringing my vision to life. They built a clean, modern, and highly functional website. Their attention to detail and willingness to accommodate requests set them truly apart from others.",
     rating: 5,
     initials: "TS",
     gradient: "from-emerald-400 to-teal-500",
@@ -204,7 +204,7 @@ export const testimonials = [
     name: "Tarique Khan",
     role: "Manager, A1 Farms",
     content:
-      "Working with Webis was a game-changer for our B2B reach. They engineered a robust, high-performance platform for A1 Farms that has significantly boosted our lead generation and digital trust score.",
+      "Working with Webis was a game-changer for our B2B reach. They engineered a robust, high-performance platform for A1 Farms that has significantly boosted our lead generation and overall digital trust score.",
     rating: 5,
     initials: "TK",
     gradient: "from-sky-400 to-blue-500",
@@ -309,4 +309,44 @@ export const whyWebis = [
     title: "Results-Obsessed",
     description: "We don't just build websites — we measure, optimize, and iterate until your goals are exceeded.",
   },
+];
+
+export const teamMembers = [
+  {
+    id: "ahsan",
+    name: "Ahsan Imam Khan",
+    role: "Founder & Full Stack Developer",
+    photo: "/ahsan.png",
+    bio: "The visionary architect behind the Webis platform. Ahsan blends deep technical mastery with creative design to build digital ecosystems that are as beautiful as they are performant.",
+    qualities: ["Innovation", "Full-Stack Mastery", "Strategic Vision"],
+    social: { 
+      linkedin: "https://www.linkedin.com/in/ahsan-imam-khan-9a0443328/", 
+      instagram: "https://www.linkedin.com/in/ahsan-imam-khan-9a0443328/", 
+      portfolio: "https://www.ahsanimamkhan.online/",
+      facebook: "https://www.ahsanimamkhan.online/"
+    }
+  },
+  {
+    id: "navneet",
+    name: "Navneet Kumar",
+    role: "Full Stack Developer",
+    photo: "/navneet.png",
+    bio: "The engineering engine of the team. Navneet specializes in crafting robust, high-performance backend systems and fluid frontend experiences that set new standards for reliability.",
+    qualities: ["Technical Logic", "Performance", "Scalability"],
+    social: { 
+      linkedin: "https://www.linkedin.com/in/navneet-kumar-03b97735a/",
+      instagram: "#" // Placeholder for Instagram as no link was provided
+    }
+  },
+  {
+    id: "akshat",
+    name: "Akshat Raj",
+    role: "Sponsor & Advertisement",
+    photo: "/akshat.png",
+    bio: "The growth strategist driving Webis's global visibility. Akshat ensures our brand reached the right audience through high-impact marketing and strategic sponsorship initiatives.",
+    qualities: ["Growth Hacking", "Partnerships", "Public Relations"],
+    social: { 
+      linkedin: "https://www.linkedin.com/in/rajakshat/" 
+    }
+  }
 ];

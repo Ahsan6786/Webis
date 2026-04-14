@@ -141,10 +141,10 @@ export default function Contact() {
               className="font-black tracking-tight mb-4"
               style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)", color: "var(--text-primary)", lineHeight: 1 }}
             >
-              The <span style={{ background: "var(--gradient-text)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Hyper Dev</span> Team is Ready
+              Book a <span style={{ background: "var(--gradient-text)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Free Consultation</span>
             </h2>
             <p style={{ color: "var(--text-secondary)", fontSize: "1.2rem", maxWidth: "700px", margin: "0 auto" }}>
-              Ready to Win? We deliver performance at the speed of light. Average response: 1 hour.
+              Have an idea? Let&apos;s talk about it. We offer free strategic consultations to help you map out your digital future.
             </p>
           </div>
         </ScrollReveal>
@@ -400,11 +400,11 @@ export default function Contact() {
                             transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
                             style={{ display: "inline-block", width: "16px", height: "16px", border: "2px solid rgba(255,255,255,0.3)", borderTop: "2px solid white", borderRadius: "50%" }}
                           />
-                          Preparing WhatsApp...
+                          Booking...
                         </span>
                       ) : (
                         <>
-                          Let’s talk <Send size={18} />
+                          Book My Consultation <Send size={18} />
                         </>
                       )}
                     </span>
