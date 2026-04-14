@@ -10,7 +10,7 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 
 /* ── Constants ─────────────────────────────────────── */
 const WA_NUMBER = "919162248786"; // +91 9162248786
-const WA_BASE   = `https://wa.me/${WA_NUMBER}`;
+const WA_BASE = `https://wa.me/${WA_NUMBER}`;
 
 const serviceOptions = [
   "Business Website",
@@ -100,7 +100,7 @@ export default function Contact() {
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
 
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200)); 
+    await new Promise((r) => setTimeout(r, 1200));
     setLoading(false);
     setSubmitted(true);
 
@@ -130,15 +130,15 @@ export default function Contact() {
                 fontWeight: 700,
                 color: "var(--brand-primary)",
                 marginBottom: "1rem",
-                background: "rgba(37, 99, 235, 0.05)",
-                border: "1px solid rgba(37, 99, 235, 0.2)"
+                background: "rgba(30, 58, 138, 0.05)",
+                border: "1px solid rgba(30, 58, 138, 0.2)"
               }}
             >
               <span style={{ width: "6px", height: "6px", background: "var(--brand-primary)", borderRadius: "50%", boxShadow: "0 0 10px var(--brand-primary)" }} />
               Pune Based Design Agency
             </motion.div>
-            <h2 
-              className="font-black tracking-tight mb-4" 
+            <h2
+              className="font-black tracking-tight mb-4"
               style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)", color: "var(--text-primary)", lineHeight: 1 }}
             >
               The <span style={{ background: "var(--gradient-text)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Hyper Dev</span> Team is Ready
@@ -150,14 +150,14 @@ export default function Contact() {
         </ScrollReveal>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "2rem" }}>
-          
+
           {/* Left Side: Info Chips */}
           <ScrollReveal direction="left">
             <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
               {[
-                { label: "WhatsApp Chat", value: "+91 9162248786", icon: MessageCircle, color: "#22c55e", href: WA_BASE },
-                { label: "Direct Support", value: "mitraai0001@gmail.com", icon: Mail, color: "#3b82f6", href: "mailto:mitraai0001@gmail.com" },
-                { label: "Phone Line", value: "+91 9162248786", icon: Phone, color: "#7c3aed", href: "tel:+919162248786" }
+                { label: "WhatsApp Chat", value: "+91 9162248786", icon: MessageCircle, color: "#25D366", href: WA_BASE }, // WhatsApp Green
+                { label: "Direct Support", value: "mitraai0001@gmail.com", icon: Mail, color: "#3B82F6", href: "mailto:mitraai0001@gmail.com" }, // Email Blue
+                { label: "Phone Line", value: "+91 9162248786", icon: Phone, color: "#8B5CF6", href: "tel:+919162248786" } // Phone Purple
               ].map((item, i) => (
                 <motion.a
                   key={i}
@@ -179,9 +179,11 @@ export default function Contact() {
                   }}
                   whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(0,0,0,0.08)" }}
                 >
-                  <div style={{ 
-                    width: "52px", height: "52px", borderRadius: "14px", background: `${item.color}15`, 
-                    display: "flex", alignItems: "center", justifyContent: "center", color: item.color 
+                  <div style={{
+                    width: "52px", height: "52px", borderRadius: "14px", 
+                    background: `linear-gradient(135deg, ${item.color}20, ${item.color}10)`,
+                    display: "flex", alignItems: "center", justifyContent: "center", color: item.color,
+                    boxShadow: `0 4px 12px ${item.color}15`,
                   }}>
                     <item.icon size={24} />
                   </div>
@@ -193,7 +195,7 @@ export default function Contact() {
               ))}
 
               <div className="luminous-border" style={{ borderRadius: "24px", marginTop: "1rem" }}>
-                <motion.div 
+                <motion.div
                   whileHover={{ scale: 1.02 }}
                   onMouseMove={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
@@ -202,11 +204,11 @@ export default function Contact() {
                     e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
                     e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
                   }}
-                  style={{ 
-                    padding: "2rem", 
-                    background: "var(--bg-card)", 
+                  style={{
+                    padding: "2rem",
+                    background: "var(--bg-card)",
                     borderRadius: "24px",
-                    position: "relative", 
+                    position: "relative",
                     overflow: "hidden",
                     border: "1px solid var(--border-subtle)",
                     transition: "transform 0.1s ease-out",
@@ -214,18 +216,18 @@ export default function Contact() {
                   className="group relative"
                 >
                   {/* Spotlight Effect */}
-                  <div 
+                  <div
                     style={{
                       position: "absolute",
                       inset: 0,
-                      background: "radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(124, 58, 237, 0.08), transparent 80%)",
+                      background: "radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(30, 58, 138, 0.08), transparent 80%)",
                       pointerEvents: "none",
                       zIndex: 1
                     }}
                   />
-                  
+
                   <div style={{ position: "absolute", top: -20, right: -20, opacity: 0.05, zIndex: 0 }}>
-                     <CheckCircle size={140} />
+                    <CheckCircle size={140} />
                   </div>
 
                   <div style={{ position: "relative", zIndex: 2 }}>
@@ -234,19 +236,20 @@ export default function Contact() {
                     </h4>
                     <ul style={{ display: "flex", flexDirection: "column", gap: "1rem", padding: 0, listStyle: "none" }}>
                       {[
-                        { text: "Fast 2-Hour Response", color: "#22c55e" },
-                        { text: "Conversion Focused Design", color: "#3b82f6" },
-                        { text: "Transparent Pricing", color: "#f59e0b" }
+                        { text: "Fast 2-Hour Response", color: "#22c55e" }, // Green
+                        { text: "Conversion Focused Design", color: "#3b82f6" }, // Blue
+                        { text: "Transparent Pricing", color: "#8b5cf6" } // Purple
                       ].map((item, i) => (
-                        <motion.li 
+                        <motion.li
                           key={i}
                           initial={{ opacity: 0, x: -10 }}
                           whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: i * 0.1 }}
+                          viewport={{ once: true, margin: "-20px" }}
+                          transition={{ delay: i * 0.1, duration: 0.5, ease: "easeOut" }}
                           style={{ fontSize: "0.95rem", fontWeight: 600, display: "flex", alignItems: "center", gap: "0.75rem", color: "var(--text-secondary)" }}
                         >
                           <div style={{ padding: "4px", borderRadius: "6px", background: `${item.color}15` }}>
-                            <CheckCircle size={16} color={item.color} /> 
+                            <CheckCircle size={16} color={item.color} />
                           </div>
                           {item.text}
                         </motion.li>
@@ -255,8 +258,8 @@ export default function Contact() {
                   </div>
 
                   {/* Glass Reflection */}
-                  <div style={{ 
-                    position: "absolute", inset: 0, 
+                  <div style={{
+                    position: "absolute", inset: 0,
                     background: "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%)",
                     pointerEvents: "none"
                   }} />
@@ -267,7 +270,7 @@ export default function Contact() {
 
           {/* Right Side: Modern Form */}
           <ScrollReveal direction="right">
-            <div 
+            <div
               data-theme="light"
               className="contact-card"
               style={{
@@ -363,13 +366,14 @@ export default function Contact() {
                   <motion.button
                     type="submit"
                     disabled={loading}
-                    className="btn btn-primary"
-                    style={{ 
+                    className="btn btn-white"
+                    style={{
                       position: "relative",
                       width: "100%",
                       overflow: "hidden",
                       cursor: loading ? "not-allowed" : "pointer",
                       opacity: loading ? 0.7 : 1,
+                      color: "white",
                     } as any}
                     whileHover={{ scale: 1.02, y: -2, boxShadow: "0 15px 40px var(--glow-primary)" }}
                     whileTap={{ scale: 0.98 }}
@@ -387,26 +391,26 @@ export default function Contact() {
                       }}
                       transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                     />
-                    
+
                     <span style={{ position: "relative", zIndex: 2, display: "flex", alignItems: "center", justifyContent: "center", gap: "0.75rem" }}>
                       {loading ? (
-                         <span style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                            <motion.span 
-                              animate={{ rotate: 360 }} 
-                              transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-                              style={{ display: "inline-block", width: "16px", height: "16px", border: "2px solid rgba(255,255,255,0.3)", borderTop: "2px solid white", borderRadius: "50%" }}
-                            />
-                            Preparing WhatsApp...
-                         </span>
+                        <span style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                          <motion.span
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                            style={{ display: "inline-block", width: "16px", height: "16px", border: "2px solid rgba(255,255,255,0.3)", borderTop: "2px solid white", borderRadius: "50%" }}
+                          />
+                          Preparing WhatsApp...
+                        </span>
                       ) : (
                         <>
-                          Start Discussion on WhatsApp <Send size={18} />
+                          Let’s talk <Send size={18} />
                         </>
                       )}
                     </span>
                   </motion.button>
 
-                  <p style={{ textAlign: "center", fontSize: "0.8rem", color: "var(--text-secondary)", fontWeight: 600, marginTop: "0.75rem" }}>
+                  <p style={{ textAlign: "center", fontSize: "0.8rem", color: "var(--text-primary)", fontWeight: 600, marginTop: "0.75rem" }}>
                     ⚡ One-click WhatsApp connect. No spam. Only results.
                   </p>
                 </form>

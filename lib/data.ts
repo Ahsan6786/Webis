@@ -25,7 +25,7 @@ export const services = [
     description:
       "Mouth-watering digital experiences with online menus, reservation systems, and visual storytelling that drives foot traffic.",
     icon: "UtensilsCrossed",
-    gradient: "from-orange-500 to-pink-400",
+    gradient: "from-blue-600 to-sky-400",
   },
   {
     id: "webapp",
@@ -201,7 +201,7 @@ export const testimonials = [
   },
   {
     id: 5,
-    name: "Fauzan Khan",
+    name: "Tarique Khan",
     role: "Manager, A1 Farms",
     content:
       "Working with Webis was a game-changer for our B2B reach. They engineered a robust, high-performance platform for A1 Farms that has significantly boosted our lead generation and digital trust score.",

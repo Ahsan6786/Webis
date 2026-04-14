@@ -9,12 +9,12 @@ import SectionHeading from "@/components/ui/SectionHeading";
 const iconMap: Record<string, React.ElementType> = { Zap, Palette, Shield, Globe, MessageCircle, TrendingUp };
 
 const palette = [
-  { bg: "rgba(37, 99, 235, 0.1)", color: "#2563eb" },
-  { bg: "rgba(14, 165, 233, 0.1)", color: "#0ea5e9" },
-  { bg: "rgba(249, 115, 22, 0.1)", color: "#f97316" },
-  { bg: "rgba(99, 102, 241, 0.1)", color: "#6366f1" },
-  { bg: "rgba(37, 99, 235, 0.1)", color: "#2563eb" },
-  { bg: "rgba(249, 115, 22, 0.1)", color: "#f97316" },
+  { bg: "rgba(37, 99, 235, 0.1)", color: "#1e3a8a" }, // Deep Blue
+  { bg: "rgba(14, 165, 233, 0.1)", color: "#0ea5e9" }, // Blue
+  { bg: "rgba(30, 64, 175, 0.1)", color: "#1e40af" },  // Mid Blue
+  { bg: "rgba(15, 23, 42, 0.1)", color: "#0f172a" },   // Obsidian
+  { bg: "rgba(37, 99, 235, 0.1)", color: "#1e3a8a" },  // Deep Blue
+  { bg: "rgba(14, 165, 233, 0.1)", color: "#0ea5e9" }, // Blue
 ];
 
 export default function WhyWebis() {
@@ -69,10 +69,14 @@ export default function WhyWebis() {
                   { label: "2-hour", sub: "average reply time" },
                   { label: "95+", sub: "PageSpeed score on every site" },
                   { label: "100%", sub: "satisfaction or we fix it free" },
-                ].map((kpi) => (
+                ].map((kpi, i) => (
                   <motion.div
                     key={kpi.label}
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
                     whileHover={{ y: -4, boxShadow: "var(--shadow-glow)" }}
+                    transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
                     style={{
                       background: "var(--bg-card)", 
                       border: "1px solid var(--border-subtle)",
@@ -97,10 +101,12 @@ export default function WhyWebis() {
               <div style={{ marginTop: "2rem" }}>
                 <a 
                   href="/#contact" 
-                  className="btn btn-primary"
+                  className="btn btn-white"
                   style={{ 
                     position: "relative",
                     overflow: "hidden",
+                    color: "white",
+                    fontWeight: 800
                   }}
                 >
                   {/* Liquid Wave Effect */}
@@ -116,7 +122,7 @@ export default function WhyWebis() {
                     }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                   />
-                  <span style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--brand-primary)", fontWeight: 800 }}>
+                  <span style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", gap: "0.5rem" }}>
                     Build Your Digital Future <ArrowRight size={18} />
                   </span>
                 </a>
@@ -141,6 +147,8 @@ export default function WhyWebis() {
                       e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
                     }}
                     whileHover={{ y: -6, boxShadow: "0 22px 60px rgba(0,0,0,0.18)" }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5, ease: "easeOut" as const }}
                     className="h-full p-6 lg:p-8 rounded-[24px] relative overflow-hidden group stable-gpu-surface"
                     style={{
                       background: "var(--bg-card)",
@@ -152,7 +160,7 @@ export default function WhyWebis() {
                     <div 
                       className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                       style={{
-                        background: "radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(37, 99, 235, 0.06), transparent 80%)",
+                        background: "radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(30, 58, 138, 0.08), transparent 80%)",
                         zIndex: 1
                       }}
                     />
@@ -168,11 +176,11 @@ export default function WhyWebis() {
                         <Icon size={20} strokeWidth={2.5} />
                       </div>
 
-                      <h3 style={{ fontSize: "1.1rem", fontWeight: 800, color: "var(--text-primary)", letterSpacing: "-0.02em", marginBottom: "0.5rem" }}>
+                      <h3 style={{ fontSize: "1.15rem", fontWeight: 800, color: "var(--text-primary)", letterSpacing: "-0.02em", marginBottom: "0.625rem" }}>
                         {item.title}
                       </h3>
 
-                      <p style={{ fontSize: "0.95rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>
+                      <p style={{ fontSize: "0.92rem", color: "var(--text-secondary)", lineHeight: 1.7, fontWeight: 500 }}>
                         {item.description}
                       </p>
                     </div>

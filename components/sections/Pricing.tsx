@@ -21,7 +21,7 @@ export default function Pricing() {
         contain: "paint",
       }}
     >
-      {/* Glow */}
+      {/* Subtle Monochrome Glows */}
       <div
         aria-hidden
         style={{
@@ -31,7 +31,7 @@ export default function Pricing() {
           width: "500px",
           height: "500px",
           background:
-            "radial-gradient(ellipse, var(--glow-primary) 0%, transparent 70%)",
+            "radial-gradient(ellipse, rgba(0, 0, 0, 0.03) 0%, transparent 70%)",
         }}
       />
       <div
@@ -43,7 +43,7 @@ export default function Pricing() {
           width: "400px",
           height: "400px",
           background:
-            "radial-gradient(ellipse, rgba(37,99,235,0.07) 0%, transparent 70%)",
+            "radial-gradient(ellipse, rgba(0, 0, 0, 0.02) 0%, transparent 70%)",
         }}
       />
 
@@ -111,7 +111,7 @@ export default function Pricing() {
                   style={{
                     position: "absolute",
                     inset: 0,
-                    background: "radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(37, 99, 235, 0.05), transparent 85%)",
+                    background: "radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(30, 58, 138, 0.05), transparent 85%)",
                     pointerEvents: "none",
                     zIndex: 1
                   }}
@@ -121,7 +121,7 @@ export default function Pricing() {
                   <div
                     style={{
                       background:
-                        "var(--gradient-cta)",
+                        "linear-gradient(135deg, #ff4d00, #ff8700, #ff4d00)",
                       padding: "0.6rem",
                       textAlign: "center",
                       fontSize: "0.72rem",

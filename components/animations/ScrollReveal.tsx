@@ -40,7 +40,7 @@ export default function ScrollReveal({
       x: 0,
       y: 0,
       transition: {
-        duration: 0.7,
+        duration: 0.5,
         delay,
         ease: "easeOut" as const,
       },
@@ -49,12 +49,11 @@ export default function ScrollReveal({
 
   return (
     <motion.div
-      ref={ref}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, margin: "-60px" }}
+      viewport={{ once: true, margin: "-50px" }}
       variants={variants}
-      className={`${className} stable-gpu-surface`}
+      className={className}
       style={{ willChange: "opacity, transform" }}
     >
       {children}

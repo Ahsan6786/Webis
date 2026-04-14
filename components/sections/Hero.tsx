@@ -1,8 +1,8 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Code2, Palette, Rocket, Mouse } from "lucide-react";
 import dynamic from "next/dynamic";
 import Magnetic from "@/components/animations/Magnetic";
 
@@ -78,33 +78,74 @@ function Cursor() {
     <span
       style={{
         display: "inline-block",
-        background: "var(--gradient-brand)",
+        background: "linear-gradient(135deg, #2563eb, #db2777)",
         borderRadius: "2px",
         verticalAlign: "middle",
         marginLeft: "4px",
         opacity: visible ? 1 : 0,
         transition: "opacity 0.08s",
-        boxShadow: "0 0 10px var(--brand-accent)",
+        boxShadow: "0 0 10px rgba(59, 130, 246, 0.5)",
       }}
     />
   );
 }
 
 const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 28 },
+  initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.7, delay, ease: "easeOut" as const },
+  transition: { duration: 0.5, delay, ease: "easeOut" as const },
 });
 
-// Lines of text to type — plain strings, styling applied separately
+// Lines of text to type
 const TYPED_LINES = [
   "We Don't Build Websites.",
   "We Build Experiences.",
 ];
 
+/* ── Floating Item Component ── */
+function FloatingItem({ icon: Icon, delay = 0, x = 0, y = 0, scale = 1, rotation = 0 }: any) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ 
+        opacity: [0.3, 0.6, 0.3],
+        scale: [scale, scale * 1.05, scale],
+        y: [y, y - 15, y],
+        rotate: [rotation, rotation + 8, rotation - 8, rotation]
+      }}
+      transition={{ 
+        duration: 8, 
+        repeat: Infinity, 
+        delay, 
+        ease: "easeInOut" 
+      }}
+      style={{
+        position: "absolute",
+        left: `calc(50% + ${x}px)`,
+        top: `calc(50% + ${y}px)`,
+        zIndex: 5,
+        pointerEvents: "none"
+      }}
+    >
+      <div style={{
+        padding: "1rem",
+        borderRadius: "16px",
+        background: "rgba(255, 255, 255, 0.03)",
+        backdropFilter: "blur(12px)",
+        border: "1.5px solid rgba(255, 255, 255, 0.12)",
+        boxShadow: "0 10px 40px rgba(0,0,0,0.3)",
+        color: "rgba(255,255,255,0.7)"
+      }}>
+        <Icon size={24} />
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+  const spotlightRef = useRef<HTMLDivElement>(null);
   const pos = useRef({ x: 0, y: 0 });
   const raf = useRef<number | null>(null);
 
@@ -112,7 +153,13 @@ export default function Hero() {
 
   useEffect(() => {
     setMounted(true);
-    const onMove = (e: MouseEvent) => { pos.current = { x: e.clientX, y: e.clientY }; };
+    const onMove = (e: MouseEvent) => { 
+      pos.current = { x: e.clientX, y: e.clientY }; 
+      if (spotlightRef.current) {
+        spotlightRef.current.style.setProperty("--x", `${e.clientX}px`);
+        spotlightRef.current.style.setProperty("--y", `${e.clientY}px`);
+      }
+    };
     window.addEventListener("mousemove", onMove, { passive: true });
 
     let cx = window.innerWidth / 2, cy = window.innerHeight / 2;
@@ -120,8 +167,8 @@ export default function Hero() {
       cx += (pos.current.x - cx) * 0.035;
       cy += (pos.current.y - cy) * 0.035;
       if (contentRef.current) {
-        const dx = (cx - window.innerWidth / 2) / window.innerWidth * 10;
-        const dy = (cy - window.innerHeight / 2) / window.innerHeight * 8;
+        const dx = (cx - window.innerWidth / 2) / window.innerWidth * 15;
+        const dy = (cy - window.innerHeight / 2) / window.innerHeight * 12;
         contentRef.current.style.transform = `translate(${dx}px, ${dy}px)`;
       }
       raf.current = requestAnimationFrame(tick);
@@ -133,7 +180,6 @@ export default function Hero() {
     };
   }, []);
 
-  // Determine if we're still typing on the last line
   const allDone = typed[TYPED_LINES.length - 1] === TYPED_LINES[TYPED_LINES.length - 1];
 
   return (
@@ -149,17 +195,30 @@ export default function Hero() {
         alignItems: "center",
         justifyContent: "center",
         overflow: "hidden",
-        background: "var(--hero-bg-deep)",
+        background: "#020205",
         contain: "paint",
       }}
     >
+      {/* ── Interactive Spotlight Glow ── */}
+      <div 
+        ref={spotlightRef}
+        aria-hidden 
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(124, 58, 237, 0.05), transparent 80%)",
+          zIndex: 1,
+          pointerEvents: "none"
+        } as any}
+      />
+
       {/* ── Nebula Glow (Blue & Purple) ── */}
       <div 
         aria-hidden 
         style={{
           position: "absolute",
           inset: 0,
-          background: "radial-gradient(circle at 80% 20%, rgba(217, 70, 239, 0.18) 0%, transparent 60%), radial-gradient(circle at 15% 45%, rgba(37, 99, 235, 0.12) 0%, transparent 55%), radial-gradient(circle at 50% 60%, rgba(236, 72, 153, 0.08) 0%, transparent 60%)",
+          background: "radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 60%), radial-gradient(circle at 15% 45%, rgba(30, 58, 138, 0.08) 0%, transparent 55%), radial-gradient(circle at 50% 60%, rgba(30, 64, 175, 0.06) 0%, transparent 60%)",
           zIndex: 0,
           pointerEvents: "none"
         }}
@@ -167,14 +226,23 @@ export default function Hero() {
       {/* ── Galaxy Canvas ── */}
       {mounted && <GalaxyCanvas />}
 
+      {/* ── Floating Interactive Elements ── */}
+      {mounted && (
+        <div style={{ position: "absolute", inset: 0, zIndex: 5, pointerEvents: "none" }}>
+          <FloatingItem icon={Code2} x={-420} y={-180} delay={0} scale={1.1} rotation={15} />
+          <FloatingItem icon={Palette} x={450} y={-100} delay={1.5} scale={1} rotation={-12} />
+          <FloatingItem icon={Rocket} x={-500} y={150} delay={3} scale={0.9} rotation={25} />
+        </div>
+      )}
+
       {/* ── Vignette ── */}
       <div
         aria-hidden
         style={{
           position: "absolute",
           inset: 0,
-          background: "radial-gradient(ellipse 80% 65% at 50% 50%, transparent 30%, var(--hero-vignette-deep) 100%)",
-          zIndex: 1,
+          background: "radial-gradient(ellipse 80% 65% at 50% 50%, transparent 20%, #000 100%)",
+          zIndex: 2,
           pointerEvents: "none",
         }}
       />
@@ -186,41 +254,62 @@ export default function Hero() {
         style={{
           position: "relative",
           zIndex: 10,
-          maxWidth: "820px",
+          maxWidth: "920px",
           width: "100%",
           padding: "0 1.5rem",
           textAlign: "center",
           willChange: "transform",
-          paddingTop: "4rem",
-          paddingBottom: "2rem",
+          paddingTop: "2rem",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center"
+          alignItems: "center",
+          fontFamily: '"Outfit", "Inter", sans-serif'
         }}
       >
-
+        {/* Top Tag */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          style={{
+            padding: "0.5rem 1rem",
+            borderRadius: "100px",
+            background: "rgba(255,255,255,0.03)",
+            backdropFilter: "blur(12px)",
+            border: "1.5px solid rgba(255,255,255,0.08)",
+            color: "rgba(255,255,255,0.6)",
+            fontSize: "0.8rem",
+            fontWeight: 700,
+            textTransform: "uppercase",
+            letterSpacing: "0.15em",
+            marginBottom: "3rem",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.2)"
+          }}
+        >
+          Webis &mdash; The New Standard
+        </motion.div>
 
         {/* Typewriter Headline */}
         <motion.div {...fadeUp(0)}>
           <h1
             style={{
               fontWeight: 900,
-              fontSize: "clamp(2.6rem, 8.5vw, 5.8rem)",
-              lineHeight: 1.1,
-              letterSpacing: "-0.03em",
-              marginBottom: "2.75rem",
-              minHeight: "2.4em",      // Increased space for stability
+              fontSize: "clamp(2.8rem, 9.5vw, 6.4rem)",
+              lineHeight: 1.05,
+              letterSpacing: "-0.04em",
+              marginBottom: "1.5rem",
+              minHeight: "2.2em",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              gap: "0.25rem"
+              gap: "0.15rem",
+              color: "#ffffff"
             }}
           >
             {/* Line 1 */}
-            <span style={{ display: "block", color: "#f0eaff", minHeight: "1.1em" }}>
+            <span style={{ display: "block", minHeight: "1.1em" }}>
               {typed[0]}
-              {/* Show cursor on active line */}
               {typed[1] === "" && <Cursor />}
             </span>
 
@@ -229,13 +318,13 @@ export default function Hero() {
               style={{
                 display: "block",
                 minHeight: "1.1em",
-                background: "var(--gradient-cta)",
+                background: "linear-gradient(135deg, #2563eb, #c026d3, #db2777)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
                 visibility: typed[1] ? "visible" : "hidden",
                 opacity: typed[1] ? 1 : 0,
-                transition: "opacity 0.4s ease"
+                transition: "opacity 0.6s ease"
               }}
             >
               {typed[1] || "Placeholder"} 
@@ -244,65 +333,67 @@ export default function Hero() {
           </h1>
         </motion.div>
 
+        {/* Sub-headline Reveal */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: allDone ? 0.7 : 0, y: allDone ? 0 : 15 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          style={{
+            fontSize: "clamp(1rem, 2vw, 1.25rem)",
+            color: "rgba(255,255,255,0.8)",
+            maxWidth: "600px",
+            lineHeight: 1.6,
+            fontWeight: 500,
+            margin: "0 auto",
+            letterSpacing: "-0.01em"
+          }}
+        >
+          We architect lightning-fast digital solutions that turn global visitors into brand advocates. High performance, zero compromise.
+        </motion.p>
+
         {/* CTA — fade */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: allDone ? 1 : 0, y: allDone ? 0 : 20 }}
-          transition={{ duration: 0.65, ease: "easeOut" }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: allDone ? 1 : 0, y: allDone ? 0 : 30 }}
+          transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
           style={{ 
             display: "flex", 
             flexWrap: "wrap", 
-            gap: "1.5rem", 
+            gap: "1.25rem", 
             justifyContent: "center",
-            marginTop: "3rem" // Improved spacing from headline
+            marginTop: "3.5rem"
           }}
         >
-          <Magnetic amount={0.25}>
+          <Magnetic amount={0.2}>
             <motion.a
               href="/#contact"
-              className="btn btn-primary"
+              className="btn btn-white"
               style={{ 
                 position: "relative",
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: "0.95rem", 
-                padding: "1rem 2.8rem", // More prominent size
+                fontSize: "1rem", 
+                padding: "1.1rem 3.2rem",
                 gap: "0.75rem", 
-                borderRadius: "16px",
+                borderRadius: "100px",
                 overflow: "hidden",
-                background: "rgba(37, 99, 235, 0.2)", // Branded glass tint
-                backdropFilter: "blur(32px) saturate(210%)",
-                WebkitBackdropFilter: "blur(32px) saturate(210%)",
-                border: "1.2px solid rgba(255,255,255,0.25)",
-                boxShadow: "0 10px 40px rgba(37, 99, 235, 0.15), inset 0 0 16px rgba(255,255,255,0.1)",
+                border: "1.5px solid rgba(255,255,255,0.2)",
+                boxShadow: "0 10px 40px rgba(124, 58, 237, 0.15)",
                 color: "white",
                 textDecoration: "none",
                 fontWeight: 700
               }}
-              whileHover={{ scale: 1.05, y: -4, boxShadow: "0 15px 50px rgba(37, 99, 235, 0.25)" }}
+              whileHover={{ scale: 1.05, y: -4, boxShadow: "0 20px 60px rgba(124, 58, 237, 0.25)" }}
               whileTap={{ scale: 0.98 }}
             >
-              {/* Liquid Wave Effect */}
-              <motion.div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "radial-gradient(circle at 50% 120%, rgba(255,255,255,0.25) 0%, transparent 60%)",
-                }}
-                animate={{
-                  y: [0, -8, 0],
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              />
               <span style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", gap: "0.75rem" }}>
                 Get Started <ArrowRight size={20} />
               </span>
             </motion.a>
           </Magnetic>
 
-          <Magnetic amount={0.15}>
+          <Magnetic amount={0.1}>
             <motion.a
               href="/#portfolio"
               className="glass-panel"
@@ -311,30 +402,29 @@ export default function Hero() {
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: "0.95rem", 
-                padding: "1rem 2.8rem", 
-                borderRadius: "16px",
-                color: "var(--text-primary)",
+                fontSize: "1rem", 
+                padding: "1.1rem 3.2rem", 
+                borderRadius: "100px",
+                color: "white",
                 textDecoration: "none",
                 fontWeight: 700,
-                border: "1.2px solid rgba(255,255,255,0.25)",
+                border: "1.5px solid rgba(255,255,255,0.15)",
                 transition: "all 0.3s ease",
                 overflow: "hidden",
-                background: "rgba(255, 255, 255, 0.05)",
-                backdropFilter: "blur(32px) saturate(210%)",
-                WebkitBackdropFilter: "blur(32px) saturate(210%)",
+                background: "rgba(255, 255, 255, 0.04)",
+                backdropFilter: "blur(24px)",
                 boxShadow: "inset 0 0 16px rgba(255, 255, 255, 0.05)"
               }}
               whileHover={{ 
                 scale: 1.05, 
                 y: -4, 
-                background: "rgba(255,255,255,0.15)",
-                boxShadow: "0 15px 50px rgba(255,255,255,0.1)" 
+                background: "rgba(255,255,255,0.08)",
+                boxShadow: "0 20px 60px rgba(255,255,255,0.05)" 
               }}
               whileTap={{ scale: 0.98 }}
             >
               <span style={{ position: "relative", zIndex: 1 }}>
-                View Work
+                View Portfolio
               </span>
             </motion.a>
           </Magnetic>
@@ -344,3 +434,4 @@ export default function Hero() {
     </section>
   );
 }
+

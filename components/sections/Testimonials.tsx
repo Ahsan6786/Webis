@@ -7,13 +7,13 @@ import { testimonials } from "@/lib/data";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 
-// Galaxy-themed avatar gradients
+// Galaxy-themed avatar gradients — enhanced for vibrant "colourful circle" look
 const avatarGradients: Record<string, string> = {
-  "from-blue-500 to-indigo-500":   "var(--gradient-cta)",
-  "from-rose-500 to-pink-500":     "var(--gradient-brand)",
-  "from-violet-500 to-purple-500": "var(--gradient-text)",
-  "from-emerald-500 to-teal-500":  "var(--gradient-cta)",
-  "from-sky-500 to-blue-500":      "var(--gradient-brand)",
+  "from-blue-500 to-indigo-500":   "linear-gradient(135deg, #2563eb, #7c3aed, #db2777)",
+  "from-rose-500 to-pink-500":     "linear-gradient(135deg, #f43f5e, #fb923c, #facc15)",
+  "from-violet-500 to-purple-500": "linear-gradient(135deg, #8b5cf6, #ec4899, #f43f5e)",
+  "from-emerald-500 to-teal-500":  "linear-gradient(135deg, #10b981, #06b6d4, #3b82f6)",
+  "from-sky-500 to-blue-500":      "linear-gradient(135deg, #0ea5e9, #2563eb, #1d4ed8)",
 };
 
 const swipeThreshold = 50;
@@ -44,7 +44,7 @@ export default function Testimonials() {
     exit: (d: number) => ({ opacity: 0, x: d > 0 ? -50 : 50 }),
   };
 
-  const slideTransition = { duration: 0.42, ease: "easeOut" as const };
+  const slideTransition = { duration: 0.5, ease: "easeOut" as const };
 
   return (
     <section id="testimonials" className="section" style={{ background: "var(--bg-primary)", position: "relative", overflow: "hidden", contain: "paint" }}>
@@ -94,14 +94,40 @@ export default function Testimonials() {
                   <Quote size={18} />
                 </div>
                 <div style={{ display: "flex", gap: "0.25rem" }}>
-                  {Array.from({ length: t.rating }).map((_, i) => <Star key={i} size={15} fill="#f97316" color="#f97316" />)}
+                  {Array.from({ length: t.rating }).map((_, i) => <Star key={i} size={15} fill="#000000" color="#000000" />)}
                 </div>
                 <blockquote style={{ fontSize: "clamp(1rem, 2.2vw, 1.15rem)", fontWeight: 500, lineHeight: 1.75, color: "var(--text-primary)", fontStyle: "italic", margin: 0, maxWidth: "640px" }}>
                   &ldquo;{t.content}&rdquo;
                 </blockquote>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
-                  <div style={{ width: "48px", height: "48px", borderRadius: "50%", background: gradient, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: "0.9rem", color: "white", boxShadow: "var(--shadow-glow)" }}>
-                    {t.initials}
+                  <div style={{ position: "relative" }}>
+                    {/* Colourful Ring Effect */}
+                    <div style={{
+                      position: "absolute",
+                      inset: -3,
+                      borderRadius: "50%",
+                      background: gradient,
+                      opacity: 0.4,
+                      filter: "blur(6px)",
+                    }} />
+                    <div style={{ 
+                      width: "56px", 
+                      height: "56px", 
+                      borderRadius: "50%", 
+                      background: gradient, 
+                      display: "flex", 
+                      alignItems: "center", 
+                      justifyContent: "center", 
+                      fontWeight: 800, 
+                      fontSize: "1rem", 
+                      color: "white", 
+                      boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+                      position: "relative",
+                      zIndex: 1,
+                      border: "2px solid rgba(255,255,255,0.8)"
+                    }}>
+                      {t.initials}
+                    </div>
                   </div>
                   <div>
                     <div style={{ fontWeight: 700, fontSize: "0.9rem", color: "var(--text-primary)" }}>{t.name}</div>

@@ -19,8 +19,9 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40);
+    const fn = () => setScrolled(window.scrollY > 120);
     window.addEventListener("scroll", fn, { passive: true });
+    fn(); // Initial check
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
@@ -29,9 +30,9 @@ export default function Navbar() {
   return (
     <>
       <motion.header
-        initial={{ y: -72, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.55, ease: "easeOut" as const }}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: scrolled ? 0 : -100, opacity: scrolled ? 1 : 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         onMouseMove={(e) => {
           const rect = e.currentTarget.getBoundingClientRect();
           const x = e.clientX - rect.left;
@@ -52,7 +53,7 @@ export default function Navbar() {
           backgroundColor: scrolled ? "rgba(255, 255, 255, 0.04)" : "transparent",
           border: scrolled ? "1px solid rgba(255, 255, 255, 0.12)" : "1px solid transparent",
           borderTop: scrolled ? "1.5px solid rgba(255, 255, 255, 0.25)" : "1px solid transparent", // Diamond edge
-          borderRadius: scrolled ? "24px" : "0",
+          borderRadius: scrolled ? "100px" : "0",
           boxShadow: scrolled ? "0 12px 40px rgba(0,0,0,0.15), inset 0 0 12px rgba(255,255,255,0.02)" : "none",
           backdropFilter: "blur(32px) saturate(210%)",
           WebkitBackdropFilter: "blur(32px) saturate(210%)",
@@ -68,7 +69,7 @@ export default function Navbar() {
             background: "radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255, 255, 255, 0.12), transparent 80%)",
             pointerEvents: "none",
             zIndex: 0,
-            borderRadius: "24px",
+            borderRadius: "100px",
             opacity: scrolled ? 1 : 0,
             transition: "opacity 0.6s ease"
           }}
@@ -96,7 +97,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1.5" style={{ background: scrolled ? "transparent" : "rgba(255,255,255,0.03)", padding: scrolled ? "0.25rem" : "0", borderRadius: "14px" }}>
+          <nav className="hidden md:flex items-center gap-1.5" style={{ background: scrolled ? "transparent" : "rgba(255,255,255,0.03)", padding: scrolled ? "0.25rem" : "0", borderRadius: "100px" }}>
             {navLinks.map((link) => (
               <motion.div
                 key={link.label}
@@ -107,7 +108,7 @@ export default function Navbar() {
                   href={link.href}
                   style={{ 
                     position: "relative", padding: "0.5rem 1rem", fontSize: "0.85rem", fontWeight: 600, 
-                    color: scrolled ? "var(--text-secondary)" : "rgba(255, 255, 255, 0.85)", textDecoration: "none", borderRadius: "10px",
+                    color: scrolled ? "var(--text-secondary)" : "rgba(255, 255, 255, 0.85)", textDecoration: "none", borderRadius: "100px",
                     letterSpacing: "0.01em", transition: "all 0.2s"
                   }}
                   onMouseEnter={(e) => {
@@ -127,44 +128,11 @@ export default function Navbar() {
 
           {/* Actions */}
           <div style={{ display: "flex", alignItems: "center", gap: "0.625rem" }}>
-            {/* CTA */}
-            <motion.a
-              href="/#contact"
-              className="btn btn-primary hidden md:inline-flex"
-              style={{ 
-                position: "relative",
-                padding: "0.6rem 1.4rem", 
-                fontSize: "0.85rem", 
-                overflow: "hidden",
-                boxShadow: scrolled ? "0 4px 14px var(--glow-primary)" : "0 4px 14px rgba(255,255,255,0.1)",
-              }}
-              whileHover={{ scale: 1.05, y: -1, boxShadow: "0 8px 25px var(--glow-primary)" }}
-              whileTap={{ scale: 0.97 }}
-            >
-              {/* Liquid Wave Effect */}
-              <motion.div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "radial-gradient(circle at 50% 120%, rgba(255,255,255,0.2) 0%, transparent 60%)",
-                }}
-                animate={{
-                  y: [0, -6, 0],
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <span style={{ position: "relative", zIndex: 1 }}>
-                Get Yours
-              </span>
-            </motion.a>
-
-
             {/* Hamburger */}
             <motion.button
               className="md:hidden"
               style={{
-                width: "36px", height: "36px", borderRadius: "10px", 
+                width: "36px", height: "36px", borderRadius: "100px", 
                 border: scrolled ? "1px solid var(--border-subtle)" : "1px solid rgba(255, 255, 255, 0.15)",
                 background: scrolled ? "var(--bg-card)" : "rgba(255,255,255,0.05)", 
                 color: scrolled ? "var(--text-primary)" : "rgba(255, 255, 255, 0.9)",
@@ -234,7 +202,7 @@ export default function Navbar() {
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
                     style={{ 
-                      display: "flex", alignItems: "center", padding: "1rem", borderRadius: "12px", 
+                      display: "flex", alignItems: "center", padding: "1rem", borderRadius: "100px", 
                       fontSize: "1.1rem", fontWeight: 700, 
                       color: "var(--text-primary)", 
                       textDecoration: "none", transition: "all 0.2s",
@@ -245,46 +213,6 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
               ))}
-
-              <div style={{ marginTop: "auto", paddingTop: "2rem" }}>
-
-                <a 
-                  href="/#contact" 
-                  className="btn btn-primary" 
-                  onClick={() => setMobileOpen(false)} 
-                  style={{ 
-                    position: "relative",
-                    width: "100%", 
-                    justifyContent: "center", 
-                    padding: "1.1rem", 
-                    borderRadius: "14px", 
-                    fontWeight: 800,
-                    overflow: "hidden",
-                    background: "var(--gradient-brand)",
-                    boxShadow: "0 8px 24px var(--glow-primary)",
-                    color: "white",
-                    display: "flex",
-                    alignItems: "center"
-                  }}
-                >
-                  {/* Liquid Wave Effect */}
-                  <motion.div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "radial-gradient(circle at 50% 120%, rgba(255,255,255,0.2) 0%, transparent 60%)",
-                    }}
-                    animate={{
-                      y: [0, -6, 0],
-                      scale: [1, 1.1, 1],
-                    }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  <span style={{ position: "relative", zIndex: 1 }}>
-                    Get Your Project
-                  </span>
-                </a>
-              </div>
             </nav>
             
             {/* Soft Branding Bottom */}

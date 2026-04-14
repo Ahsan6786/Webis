@@ -10,6 +10,7 @@ interface Star {
   twinkleSpeed: number;
   twinklePhase: number;
   tint: number;
+  layer: number; // 1: Far, 2: Mid, 3: Near
 }
 
 interface ShootingStar {
@@ -48,89 +49,94 @@ export default function GalaxyCanvas() {
 
     const initStars = () => {
       const isMobile = window.innerWidth < 768;
-      // Adaptive count: Halved on mobile for "fast like hell" performance
-      const baseDensity = isMobile ? 12000 : 8000;
-      const count = Math.min(isMobile ? 80 : 150, Math.floor((canvas.width * canvas.height) / baseDensity));
+      const baseDensity = isMobile ? 10000 : 6000;
+      const count = Math.min(isMobile ? 120 : 250, Math.floor((canvas.width * canvas.height) / baseDensity));
       
       stars = Array.from({ length: count }, () => {
         const tintRoll = Math.random();
+        const layerRoll = Math.random();
         return {
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() > 0.85 ? 2 : 1,
-          baseOpacity: Math.random() * 0.6 + 0.3,
-          twinkleSpeed: Math.random() * 0.04 + 0.015,
+          size: Math.random() > 0.95 ? 2 : 1, // Rarer large stars
+          baseOpacity: Math.random() * 0.5 + 0.2,
+          twinkleSpeed: Math.random() * 0.03 + 0.01,
           twinklePhase: Math.random() * Math.PI * 2,
-          tint: tintRoll < 0.55 ? 0 : tintRoll < 0.80 ? 1 : 2,
+          tint: tintRoll < 0.6 ? 0 : tintRoll < 0.85 ? 1 : 2,
+          layer: layerRoll < 0.6 ? 1 : layerRoll < 0.9 ? 2 : 3,
         };
       });
     };
 
     const rTint = (tint: number) => {
-      if (tint === 1) return [210, 160, 255];
-      if (tint === 2) return [255, 160, 200];
-      return [245, 230, 255];
+      if (tint === 1) return [180, 140, 255]; // Purp-blue
+      if (tint === 2) return [255, 120, 180]; // Pinkish
+      return [240, 240, 255]; // Cool white
     };
 
     const spawnShootingStar = (): ShootingStar => ({
-      x: Math.random() * canvas.width * 0.8 + canvas.width * 0.1,
-      y: Math.random() * canvas.height * 0.4,
-      len: 120 + Math.random() * 180,
-      speed: 7 + Math.random() * 6, // Reduced speed for cinematic feel
+      x: Math.random() * canvas.width * 0.9,
+      y: Math.random() * canvas.height * 0.5,
+      len: 150 + Math.random() * 250,
+      speed: 8 + Math.random() * 8,
       opacity: 0,
       active: true,
-      angle: 195 + Math.random() * 35,
+      angle: 200 + Math.random() * 30,
       progress: 0,
     });
 
     const scheduleShootingStar = (slot: number) => {
-      const delay = 4000 + Math.random() * 6000; // Increased delay for maturity
+      const delay = 3000 + Math.random() * 5000;
       shootingTimers[slot] = setTimeout(() => {
         shooters[slot] = spawnShootingStar();
         scheduleShootingStar(slot);
       }, delay);
     };
 
-    /* ── Nebula: deeper, richer pinkish-purple clouds ── */
+    /* ── Nebula: deeper, richer shifting clouds ── */
     const drawNebula = () => {
-      const cx = canvas.width * 0.5 + Math.sin(t * 0.0004) * 50;
-      const cy = canvas.height * 0.42 + Math.cos(t * 0.0003) * 35;
+      const shiftX = Math.sin(t * 0.0002) * 40;
+      const shiftY = Math.cos(t * 0.00015) * 30;
+      
+      // Dynamic color shifts
+      const hue1 = 280 + Math.sin(t * 0.0001) * 20; // Purple shift
+      const hue2 = 330 + Math.cos(t * 0.00008) * 15; // Pink shift
 
-      const g1 = ctx.createRadialGradient(cx, cy, 0, cx, cy, canvas.width * 0.6);
-      g1.addColorStop(0, "rgba(160, 40, 220, 0.15)");
-      g1.addColorStop(0.5, "rgba(120, 20, 180, 0.06)");
+      const g1 = ctx.createRadialGradient(
+        canvas.width * 0.7 + shiftX, canvas.height * 0.2 + shiftY, 0, 
+        canvas.width * 0.7 + shiftX, canvas.height * 0.2 + shiftY, 
+        canvas.width * 0.7
+      );
+      g1.addColorStop(0, `hsla(${hue1}, 70%, 50%, 0.12)`);
       g1.addColorStop(1, "rgba(0,0,0,0)");
       ctx.fillStyle = g1;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const g2 = ctx.createRadialGradient(
-        canvas.width * 0.85, canvas.height * 0.65, 0,
-        canvas.width * 0.85, canvas.height * 0.65,
-        canvas.width * 0.4
+        canvas.width * 0.2 - shiftX, canvas.height * 0.8 - shiftY, 0,
+        canvas.width * 0.2 - shiftX, canvas.height * 0.8 - shiftY,
+        canvas.width * 0.5
       );
-      g2.addColorStop(0, "rgba(200, 40, 140, 0.11)");
+      g2.addColorStop(0, `hsla(${hue2}, 70%, 40%, 0.1)`);
       g2.addColorStop(1, "rgba(0,0,0,0)");
       ctx.fillStyle = g2;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      const g3 = ctx.createRadialGradient(
-        canvas.width * 0.08, canvas.height * 0.75, 0,
-        canvas.width * 0.08, canvas.height * 0.75,
-        canvas.width * 0.4
-      );
-      g3.addColorStop(0, "rgba(180, 40, 200, 0.12)");
-      g3.addColorStop(1, "rgba(0,0,0,0)");
-      ctx.fillStyle = g3;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
 
-    /* ── Stars: Sharp pixel-based drawing (no anti-aliasing blur) ── */
-    const drawStars = () => {
+    /* ── Stars: Parallax-aware drawing ── */
+    const drawStars = (speedMult: number) => {
       for (const star of stars) {
-        const twinkle = (Math.sin(t * star.twinkleSpeed + star.twinklePhase) + 1) / 2;
-        const alpha = star.baseOpacity * (0.15 + twinkle * 0.85);
+        // Subtle drift based on layer
+        const drift = star.layer * 0.08 * speedMult;
+        star.y += drift;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
 
-        // Snap to integers to avoid any sub-pixel rendering blur
+        const twinkle = (Math.sin(t * star.twinkleSpeed + star.twinklePhase) + 1) / 2;
+        const alpha = star.baseOpacity * (0.2 + twinkle * 0.8);
+
         const x = Math.round(star.x);
         const y = Math.round(star.y);
         const [r, g, b] = rTint(star.tint);
@@ -139,30 +145,24 @@ export default function GalaxyCanvas() {
           ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
           ctx.fillRect(x, y, 1, 1);
         } else {
-          // Draw a sharp cross without arc/line anti-aliasing
-          const a1 = alpha * 0.8;
+          const a1 = alpha * 0.6;
           ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a1})`;
-          ctx.fillRect(x - 2, y, 5, 1); // horizontal bar
-          ctx.fillRect(x, y - 2, 1, 5); // vertical bar
-
-          // Core bright pixel
+          ctx.fillRect(x - 2, y, 5, 1);
+          ctx.fillRect(x, y - 2, 1, 5);
           ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
           ctx.fillRect(x, y, 1, 1);
         }
       }
     };
 
-    /* ── Shooting stars: smooth movement based on delta time ── */
     const drawShootingStar = (s: ShootingStar, speedMult: number) => {
       if (!s.active) return;
-
-      // Update by high precision speed multiplier 
       s.progress += s.speed * speedMult;
-      const totalLen = s.len + canvas.width * 0.35;
+      const totalLen = s.len + canvas.width * 0.2;
       const frac = s.progress / totalLen;
 
       if (frac < 0.1) s.opacity = frac / 0.1;
-      else if (frac > 0.7) s.opacity = 1 - (frac - 0.7) / 0.3;
+      else if (frac > 0.8) s.opacity = 1 - (frac - 0.8) / 0.2;
       else s.opacity = 1;
 
       if (frac >= 1) { s.active = false; return; }
@@ -176,39 +176,26 @@ export default function GalaxyCanvas() {
 
       const grad = ctx.createLinearGradient(sx, sy, ex, ey);
       grad.addColorStop(0, "rgba(255,255,255,0)");
-      grad.addColorStop(0.6, `rgba(220, 140, 255, ${s.opacity * 0.7})`);
-      grad.addColorStop(0.9, `rgba(255, 180, 220, ${s.opacity * 0.9})`);
-      grad.addColorStop(1, `rgba(255, 255, 255, ${s.opacity})`);
+      grad.addColorStop(0.5, `rgba(180, 140, 255, ${s.opacity * 0.6})`);
+      grad.addColorStop(1, `rgba(255, 255, 255, ${s.opacity * 0.9})`);
 
       ctx.beginPath();
-      // Keep lineTo for shooting star trails as they naturally look better smooth
       ctx.moveTo(sx, sy);
       ctx.lineTo(ex, ey);
       ctx.strokeStyle = grad;
-      ctx.lineWidth = 1.4;
-      ctx.lineCap = "round";
+      ctx.lineWidth = 1.2;
       ctx.stroke();
-
-      const headGlow = ctx.createRadialGradient(ex, ey, 0, ex, ey, 5);
-      headGlow.addColorStop(0, `rgba(255, 220, 255, ${s.opacity})`);
-      headGlow.addColorStop(1, "rgba(200, 100, 255, 0)");
-      ctx.fillStyle = headGlow;
-      ctx.beginPath();
-      ctx.arc(ex, ey, 5, 0, Math.PI * 2);
-      ctx.fill();
     };
 
     const draw = (now: number) => {
-      // Calculate delta time for 144fps / varied frame-rate support
       const dt = (now - lastDtTime) / 1000;
       lastDtTime = now;
-      const speedMult = Math.min(dt * 60, 2.5); // 1.0 at 60fps, ~0.41 at 144fps
-
+      const speedMult = Math.min(dt * 60, 2.0);
       t += speedMult;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       drawNebula();
-      drawStars();
+      drawStars(speedMult);
       for (const s of shooters) drawShootingStar(s, speedMult);
 
       raf = requestAnimationFrame(draw);
@@ -218,7 +205,7 @@ export default function GalaxyCanvas() {
 
     for (let i = 0; i < MAX_SHOOTERS; i++) {
       shooters.push({ x: 0, y: 0, len: 0, speed: 0, opacity: 0, active: false, angle: 0, progress: 0 });
-      setTimeout(() => scheduleShootingStar(i), i * 600);
+      setTimeout(() => scheduleShootingStar(i), i * 800);
     }
 
     raf = requestAnimationFrame((now) => {

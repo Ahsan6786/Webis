@@ -19,7 +19,7 @@ export default function SectionHeading({ label, title, titleHighlight, subtitle,
   return (
     <div className={cn("flex flex-col gap-4", alignClass, className)}>
       {label && (
-        <span style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", padding: "0.4rem 1rem", borderRadius: "100px", background: "var(--brand-glow-b)", color: "var(--brand-primary)", border: "1px solid var(--border-subtle)", width: "fit-content" }}>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", padding: "0.4rem 1rem", borderRadius: "100px", background: "rgba(0,0,0,0.05)", color: "#000000", border: "1px solid rgba(0,0,0,0.1)", width: "fit-content" }}>
           {label}
         </span>
       )}

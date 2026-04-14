@@ -34,7 +34,7 @@ export default function Footer() {
   return (
     <footer style={{ background: "#000000", borderTop: "1px solid rgba(255,255,255,0.05)", position: "relative", color: "#ffffff" }}>
       {/* Galaxy top line */}
-      <div aria-hidden style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, transparent, #c2600a 35%, #ea580c 50%, #f59e0b 70%, transparent)", opacity: 0.8 }} />
+      <div aria-hidden style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, transparent, #333333 35%, #666666 50%, #333333 70%, transparent)", opacity: 0.6 }} />
 
       <div style={{ maxWidth: "1320px", margin: "0 auto", padding: "4.5rem 1.5rem 2rem" }}>
         <div
@@ -76,7 +76,7 @@ export default function Footer() {
                     background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)",
                     color: "rgba(255,255,255,0.4)", transition: "background 0.2s, color 0.2s",
                   }}
-                  onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = "rgba(255,107,0,0.15)"; el.style.color = "#ff6b00"; }}
+                  onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = "rgba(255,255,255,0.15)"; el.style.color = "#ffffff"; }}
                   onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = "rgba(255,255,255,0.05)"; el.style.color = "rgba(255,255,255,0.4)"; }}
                 >
                   <Icon size={15} />
@@ -94,13 +94,13 @@ export default function Footer() {
                   <li key={link.label}>
                     {"external" in link && link.external ? (
                       <a href={link.href} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "0.25rem", fontSize: "0.83rem", color: "rgba(255,255,255,0.6)", textDecoration: "none", transition: "color 0.2s" }}
-                        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#ea580c"; }}
+                        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#ffffff"; }}
                         onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.6)"; }}>
                         {link.label}<ArrowUpRight size={11} style={{ opacity: 0.5 }} />
                       </a>
                     ) : (
                       <Link href={link.href} style={{ fontSize: "0.83rem", color: "rgba(255,255,255,0.6)", textDecoration: "none", transition: "color 0.2s" }}
-                        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#ea580c"; }}
+                        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#ffffff"; }}
                         onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.6)"; }}>
                         {link.label}
                       </Link>
@@ -115,7 +115,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "1rem", paddingTop: "1.75rem" }}>
           <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.4)", display: "flex", alignItems: "center", gap: "0.3rem", margin: 0 }}>
-            © {new Date().getFullYear()} Webis. Made with <Heart size={12} color="#ea580c" fill="#ea580c" /> in Pune, India.
+            © {new Date().getFullYear()} Webis. Made with <Heart size={12} color="#ffffff" fill="#ffffff" /> in Pune, India.
           </p>
           <div style={{ display: "flex", gap: "1.5rem" }}>
           </div>

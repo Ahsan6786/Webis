@@ -8,10 +8,10 @@ import SectionHeading from "@/components/ui/SectionHeading";
 const iconMap: Record<string, React.ElementType> = { Building2, Layers, UtensilsCrossed, Code2 };
 
 const cardAccents: Record<string, { from: string; to: string; hoverGlow: string }> = {
-  business: { from: "#2563eb", to: "#4338ca", hoverGlow: "rgba(37, 99, 235, 0.15)" },
-  portfolio: { from: "#0ea5e9", to: "#2563eb", hoverGlow: "rgba(14, 165, 233, 0.15)" },
-  restaurant: { from: "#38bdf8", to: "#0ea5e9", hoverGlow: "rgba(56, 189, 248, 0.15)" },
-  webapp: { from: "#6366f1", to: "#2563eb", hoverGlow: "rgba(99, 102, 241, 0.15)" },
+  business: { from: "#2563eb", to: "#1d4ed8", hoverGlow: "rgba(37, 99, 235, 0.25)" },
+  portfolio: { from: "#7c3aed", to: "#6d28d9", hoverGlow: "rgba(124, 58, 237, 0.25)" },
+  restaurant: { from: "#0ea5e9", to: "#0284c7", hoverGlow: "rgba(14, 165, 233, 0.25)" },
+  webapp: { from: "#1e3a8a", to: "#1e40af", hoverGlow: "rgba(30, 58, 138, 0.25)" },
 };
 
 function TimelineCard({ service, i }: { service: typeof services[0]; i: number }) {
@@ -46,6 +46,7 @@ function TimelineCard({ service, i }: { service: typeof services[0]; i: number }
         <motion.div
           initial={{ opacity: 0, x: isLeftOnDesktop ? -30 : 30, y: 15 }}
           whileInView={{ opacity: 1, x: 0, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
           onMouseMove={(e) => {
             const rect = e.currentTarget.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -54,7 +55,7 @@ function TimelineCard({ service, i }: { service: typeof services[0]; i: number }
             e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
           }}
           whileHover={{ y: -6, boxShadow: "0 22px 60px rgba(0,0,0,0.18)" }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="w-[calc(100%-4.5rem)] md:w-[calc(50%-3.5rem)] p-8 sm:p-10 rounded-[28px] relative overflow-hidden"
           style={{
             background: "var(--bg-card)", 
@@ -69,7 +70,7 @@ function TimelineCard({ service, i }: { service: typeof services[0]; i: number }
             style={{
               position: "absolute",
               inset: 0,
-              background: "radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(37, 99, 235, 0.05), transparent 80%)",
+              background: "radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(30, 64, 175, 0.05), transparent 80%)",
               pointerEvents: "none",
               zIndex: 1
             }}
@@ -90,10 +91,10 @@ function TimelineCard({ service, i }: { service: typeof services[0]; i: number }
 
             <motion.a
               href="/#contact"
-              style={{ color: acc.from, fontWeight: 700, display: "inline-flex", alignItems: "center", gap: "0.5rem", fontSize: "0.95rem" }}
+              style={{ color: "var(--text-primary)", fontWeight: 700, display: "inline-flex", alignItems: "center", gap: "0.5rem", fontSize: "0.95rem" }}
               whileHover={{ x: 5 }}
             >
-              Consult on Phase <ArrowRight size={16} />
+              Let’s talk <ArrowRight size={16} />
             </motion.a>
           </div>
         </motion.div>
@@ -156,7 +157,7 @@ export default function Services() {
               }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
-            <span style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--brand-primary)", fontWeight: 800 }}>
+            <span style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", gap: "0.5rem", color: "white", fontWeight: 800 }}>
               Let’s talk <ArrowRight size={18} />
             </span>
           </a>

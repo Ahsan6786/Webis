@@ -236,9 +236,9 @@ export default function Portfolio() {
                           display: "flex",
                           alignItems: "center",
                           gap: "0.35rem",
-                          fontSize: "0.8rem",
-                          fontWeight: 600,
-                          color: "#7c3aed",
+                          fontSize: "0.85rem",
+                          fontWeight: 700,
+                          color: "#0f172a",
                         }}
                       >
                         View Case Study <ArrowRight size={13} />
@@ -258,7 +258,7 @@ export default function Portfolio() {
               className="btn btn-primary"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              style={{ color: "var(--brand-primary)", fontWeight: 800 }}
+              style={{ color: "white", fontWeight: 800 }}
             >
               Start Your Project <ArrowRight size={16} />
             </motion.a>
