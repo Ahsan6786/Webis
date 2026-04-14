@@ -103,7 +103,7 @@ export default function TeamPreview() {
           ))}
         </div>
 
-        <ScrollReveal delay={0.4} align="center">
+        <ScrollReveal delay={0.4}>
           <Link href="/team" style={{ textDecoration: "none" }}>
             <motion.div
               whileHover={{ scale: 1.02 }}
