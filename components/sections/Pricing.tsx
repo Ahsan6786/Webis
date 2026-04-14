@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Check, X, ArrowRight, Sparkles, Zap } from "lucide-react";
+import { Check, X, ArrowRight, Sparkles } from "lucide-react";
 import { pricingTiers } from "@/lib/data";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SectionHeading from "@/components/ui/SectionHeading";
