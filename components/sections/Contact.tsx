@@ -4,9 +4,12 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Send, MessageCircle, Mail, Phone,
-  User, ChevronDown, CheckCircle, Search
+  User, ChevronDown, CheckCircle, Search, Database, ArrowRight, Loader2
 } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import Magnetic from "@/components/animations/Magnetic";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 /* ── Constants ─────────────────────────────────────── */
 const WA_NUMBER = "919162248786"; // +91 9162248786
@@ -85,8 +88,9 @@ const inputError: React.CSSProperties = {
 export default function Contact() {
   const [form, setForm] = useState<FormData>({ name: "", email: "", phone: "", service: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [submitted, setSubmitted] = useState(false);
+  const [showOptions, setShowOptions] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -94,18 +98,43 @@ export default function Contact() {
     if (errors[name as keyof FormErrors]) setErrors((p) => ({ ...p, [name]: undefined }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleInitialSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate(form);
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
 
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
-    setSubmitted(true);
+    
+    try {
+      // Background save to Firestore for safety
+      await addDoc(collection(db, "contact_leads"), {
+        ...form,
+        createdAt: serverTimestamp(),
+        method: "pending_choice"
+      });
+      
+      setShowOptions(true);
+    } catch (error) {
+      console.error("Error saving lead:", error);
+      // Fallback to options even if storage fails
+      setShowOptions(true);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  const handleWhatsApp = () => {
     const waUrl = `${WA_BASE}?text=${buildWAMessage(form)}`;
     window.open(waUrl, "_blank", "noopener,noreferrer");
+    setSuccess(true);
+  };
+
+  const handleDatabase = async () => {
+    setLoading(true);
+    // Already saved in background, just update success state or log it
+    await new Promise(r => setTimeout(r, 800));
+    setSuccess(true);
+    setLoading(false);
   };
 
   return (
@@ -284,33 +313,91 @@ export default function Contact() {
                 overflow: "hidden"
               }}
             >
-              {submitted ? (
+              {success ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "2rem 0", textAlign: "center", gap: "1rem" }}
+                  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "3rem 0", textAlign: "center", gap: "1.5rem" }}
                 >
-                  <div style={{ width: "64px", height: "64px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.3)" }}>
-                    <CheckCircle size={28} color="#22c55e" />
+                  <div style={{ width: "80px", height: "80px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.3)", marginBottom: "1rem" }}>
+                    <CheckCircle size={40} color="#22c55e" />
                   </div>
-                  <h3 style={{ fontWeight: 800, fontSize: "1.4rem", color: "var(--text-primary)", margin: 0 }}>
-                    Opening WhatsApp…
+                  <h3 style={{ fontWeight: 900, fontSize: "2rem", color: "var(--text-primary)", margin: 0, tracking: "-0.04em" }}>
+                    Request Received.
                   </h3>
-                  <p style={{ color: "var(--text-secondary)", maxWidth: "340px" }}>
-                    Thanks {form.name.split(' ')[0]}! Your message has been prepared. If WhatsApp didn&apos;t open automatically, click below.
+                  <p style={{ color: "var(--text-secondary)", fontSize: "1.1rem", maxWidth: "400px", lineHeight: 1.6 }}>
+                    Thanks {form.name.split(' ')[0]}! We've successfully captured your project details. Our team will review your requirements and reach back within 2 hours.
                   </p>
-                  <a
-                    href={`${WA_BASE}?text=${buildWAMessage(form)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-primary"
-                    style={{ marginTop: "1rem", padding: "1rem 2rem" }}
+                  <button
+                    onClick={() => { setShowOptions(false); setSuccess(false); setForm({ name: "", email: "", phone: "", service: "", message: "" }); }}
+                    className="text-slate-400 font-bold hover:text-blue-600 transition-colors text-sm"
                   >
-                    Launch WhatsApp Again
-                  </a>
+                    Send another request?
+                  </button>
+                </motion.div>
+              ) : showOptions ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  style={{ display: "flex", flexDirection: "column", gap: "1.5rem", padding: "1rem 0" }}
+                >
+                  <div className="mb-4">
+                    <h3 style={{ fontWeight: 900, fontSize: "1.75rem", color: "var(--text-primary)", marginBottom: "0.5rem", tracking: "-0.02em" }}>
+                      Choose your channel.
+                    </h3>
+                    <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
+                      Select how you would like to proceed with your consultation.
+                    </p>
+                  </div>
+
+                  <div className="grid gap-4">
+                    <Magnetic>
+                      <button
+                        onClick={handleWhatsApp}
+                        className="w-full p-6 rounded-2xl border-2 border-green-500/20 bg-green-500/5 hover:bg-green-500/10 transition-all flex items-center justify-between group"
+                      >
+                        <div className="flex items-center gap-4 text-left">
+                          <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white shadow-lg shadow-green-500/20">
+                            <MessageCircle size={24} />
+                          </div>
+                          <div>
+                            <div className="font-black text-slate-900">Send via WhatsApp</div>
+                            <div className="text-sm text-green-600 font-bold">Immediate Reply Guaranteed</div>
+                          </div>
+                        </div>
+                        <ArrowRight size={20} className="text-green-500 group-hover:translate-x-1 transition-transform" />
+                      </button>
+                    </Magnetic>
+
+                    <Magnetic>
+                      <button
+                        onClick={handleDatabase}
+                        disabled={loading}
+                        className="w-full p-6 rounded-2xl border-2 border-blue-500/20 bg-blue-500/5 hover:bg-blue-500/10 transition-all flex items-center justify-between group"
+                      >
+                        <div className="flex items-center gap-4 text-left">
+                          <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-600/20">
+                            {loading ? <Loader2 size={24} className="animate-spin" /> : <Database size={24} />}
+                          </div>
+                          <div>
+                            <div className="font-black text-slate-900">Official Direct Registration</div>
+                            <div className="text-sm text-blue-600 font-bold">Manual Review within 2 hours</div>
+                          </div>
+                        </div>
+                        <ArrowRight size={20} className="text-blue-500 group-hover:translate-x-1 transition-transform" />
+                      </button>
+                    </Magnetic>
+                  </div>
+
+                  <button 
+                    onClick={() => setShowOptions(false)}
+                    className="mt-4 text-slate-400 font-bold hover:text-slate-900 transition-colors text-sm"
+                  >
+                    ← Back to edit form
+                  </button>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                <form onSubmit={handleInitialSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }} className="grid-cols-1 sm:grid-cols-2">
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                       <label style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-primary)" }}>Full Name</label>
@@ -366,14 +453,13 @@ export default function Contact() {
                   <motion.button
                     type="submit"
                     disabled={loading}
-                    className="btn btn-white"
+                    className="btn btn-primary"
                     style={{
                       position: "relative",
                       width: "100%",
                       overflow: "hidden",
                       cursor: loading ? "not-allowed" : "pointer",
                       opacity: loading ? 0.7 : 1,
-                      color: "white",
                     } as any}
                     whileHover={{ scale: 1.02, y: -2, boxShadow: "0 15px 40px var(--glow-primary)" }}
                     whileTap={{ scale: 0.98 }}

@@ -180,23 +180,31 @@ export default function TeamContent() {
 
                    <div style={{ display: "flex", justifyContent: "center", gap: "1.25rem" }}>
                     {member.social.linkedin && (
-                      <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", borderRadius: "12px", background: "rgba(255,255,255,0.05)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "var(--brand-primary)"; e.currentTarget.style.color = "white"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.color = "var(--text-secondary)"; }}>
-                        <Link2 size={20} strokeWidth={1.5} />
+                      <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", borderRadius: "12px", background: "rgba(255,255,255,0.05)", border: "1px solid var(--border-subtle)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "var(--brand-primary)"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}>
+                        <div style={{ position: "relative", width: "18px", height: "18px" }}>
+                          <Image src="/linkedin.png" alt="LinkedIn" fill style={{ objectFit: "contain" }} />
+                        </div>
                       </a>
                     )}
                     {member.social.instagram && (
-                      <a href={member.social.instagram} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", borderRadius: "12px", background: "rgba(255,255,255,0.05)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)"; e.currentTarget.style.color = "white"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.color = "var(--text-secondary)"; }}>
-                        <InstagramIcon size={20} />
+                      <a href={member.social.instagram} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", borderRadius: "12px", background: "rgba(255,255,255,0.05)", border: "1px solid var(--border-subtle)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}>
+                        <div style={{ position: "relative", width: "18px", height: "18px" }}>
+                          <Image src="/insta.png" alt="Instagram" fill style={{ objectFit: "contain" }} />
+                        </div>
                       </a>
                     )}
                     {member.social.portfolio && (
-                      <a href={member.social.portfolio} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", borderRadius: "12px", background: "rgba(255,255,255,0.05)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "var(--brand-primary)"; e.currentTarget.style.color = "white"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.color = "var(--text-secondary)"; }}>
-                        <Link2 size={20} strokeWidth={1.5} />
+                      <a href={member.social.portfolio} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", borderRadius: "12px", background: "rgba(255,255,255,0.05)", border: "1px solid var(--border-subtle)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "#000"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}>
+                        <div style={{ position: "relative", width: "18px", height: "18px" }}>
+                          <Image src="/portfolio.png" alt="Portfolio" fill style={{ objectFit: "contain" }} />
+                        </div>
                       </a>
                     )}
                     {member.social.facebook && (
-                      <a href={member.social.facebook} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", borderRadius: "12px", background: "rgba(255,255,255,0.05)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "#1877F2"; e.currentTarget.style.color = "white"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.color = "var(--text-secondary)"; }}>
-                        <CircleCheck size={20} strokeWidth={1.5} />
+                      <a href={member.social.facebook} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", borderRadius: "12px", background: "rgba(255,255,255,0.05)", border: "1px solid var(--border-subtle)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "#1877F2"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}>
+                        <div style={{ position: "relative", width: "18px", height: "18px" }}>
+                          <Image src="/facebook.png" alt="Facebook" fill style={{ objectFit: "contain" }} />
+                        </div>
                       </a>
                     )}
                   </div>

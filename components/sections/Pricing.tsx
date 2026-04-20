@@ -134,8 +134,8 @@ export default function Pricing() {
                 )}
 
                 <div
+                  className="p-5 md:p-8"
                   style={{
-                    padding: "2rem",
                     display: "flex",
                     flexDirection: "column",
                     flex: 1,
@@ -143,9 +143,9 @@ export default function Pricing() {
                 >
                   {/* Name */}
                   <h3
+                    className="text-lg md:text-xl"
                     style={{
                       fontWeight: 800,
-                      fontSize: "1.15rem",
                       color: "var(--text-primary)",
                       zIndex: 2,
                     }}
@@ -158,11 +158,11 @@ export default function Pricing() {
                   </p>
 
                   {/* Price */}
-                  <div style={{ margin: "1.5rem 0", zIndex: 2 }}>
+                  <div className="my-4 md:my-6" style={{ zIndex: 2 }}>
                     <span
+                      className="text-4xl md:text-5xl lg:text-[2.8rem]"
                       style={{
                         fontWeight: 900,
-                        fontSize: "2.8rem",
                         color: "var(--text-primary)",
                       }}
                     >

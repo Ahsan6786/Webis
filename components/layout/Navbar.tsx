@@ -17,6 +17,7 @@ const navLinks = [
   { label: "Portfolio", href: "/#portfolio", icon: Briefcase },
   { label: "Team",      href: "/team",       icon: Users },
   { label: "Pricing",   href: "/#pricing",    icon: CreditCard },
+  { label: "Refer & Earn", href: "/referral", icon: Link2 },
   { label: "Contact",   href: "/#contact",    icon: MessageSquare },
 ];
 
@@ -37,9 +38,23 @@ export default function Navbar() {
   return (
     <>
       <motion.header
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: scrolled ? 0 : -100, opacity: scrolled ? 1 : 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        initial={false}
+        animate={{ 
+          y: 0,
+          opacity: 1,
+          top: scrolled ? "1.25rem" : "0rem",
+          width: scrolled ? "calc(100% - 2.5rem)" : "100%",
+          padding: scrolled ? "0.2rem 0" : "0.5rem 0",
+          borderRadius: scrolled ? "100px" : "0px",
+          backgroundColor: scrolled ? "rgba(255, 255, 255, 0.04)" : "rgba(255, 255, 255, 0)",
+          borderWidth: scrolled ? "1px" : "0px",
+          borderColor: scrolled ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0)",
+        }}
+        transition={{ 
+          duration: 0.5, 
+          ease: [0.16, 1, 0.3, 1],
+          opacity: { duration: 0.3 }
+        }}
         onMouseMove={(e) => {
           const rect = e.currentTarget.getBoundingClientRect();
           const x = e.clientX - rect.left;
@@ -49,23 +64,15 @@ export default function Navbar() {
         }}
         style={{
           position: "fixed", 
-          top: scrolled ? "1.25rem" : "0", 
           left: 0, 
           right: 0, 
           zIndex: 50,
           margin: "0 auto",
           maxWidth: "1100px",
-          width: scrolled ? "calc(100% - 2.5rem)" : "100%",
-          padding: scrolled ? "0.2rem 0" : "0.5rem 0",
-          backgroundColor: scrolled ? "rgba(255, 255, 255, 0.04)" : "transparent",
-          border: scrolled ? "1px solid rgba(255, 255, 255, 0.12)" : "1px solid transparent",
-          borderTop: scrolled ? "1.5px solid rgba(255, 255, 255, 0.25)" : "1px solid transparent", // Diamond edge
-          borderRadius: scrolled ? "100px" : "0",
           boxShadow: scrolled ? "0 12px 40px rgba(0,0,0,0.15), inset 0 0 12px rgba(255,255,255,0.02)" : "none",
-          backdropFilter: "blur(32px) saturate(210%)",
-          WebkitBackdropFilter: "blur(32px) saturate(210%)",
-          opacity: 1,
-          transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1), backdrop-filter 0.6s ease",
+          backdropFilter: scrolled ? "blur(32px) saturate(210%)" : "blur(0px)",
+          WebkitBackdropFilter: scrolled ? "blur(32px) saturate(210%)" : "blur(0px)",
+          willChange: "transform, top, width, border-radius, background-color",
         } as any}
       >
         {/* Physical Refraction Glint — Solidified opacity-based render */}
@@ -83,24 +90,30 @@ export default function Navbar() {
         />
         <div className="mx-auto flex items-center justify-between px-6 py-3">
           {/* Logo */}
-          <Link href="/" style={{ display: "flex", alignItems: "center", gap: "0.625rem", textDecoration: "none" }}>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }} style={{ display: "flex", alignItems: "center", gap: "0.625rem", willChange: "transform" }}>
-                <div
-                  style={{
-                    width: "36px", height: "36px", 
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    position: "relative",
-                  }}
-                >
-                  <Image 
-                    src="/logo.png" 
-                    alt="Webis Digital Agency Logo" 
-                    fill
-                    style={{ objectFit: "contain" }}
-                    priority
-                  />
-                </div>
-              <span style={{ fontWeight: 800, fontSize: "1.1rem", color: scrolled ? "var(--text-primary)" : "#fff", letterSpacing: "-0.02em" }}>Webis</span>
+          <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
+            <motion.div 
+              whileHover={{ scale: 1.02 }} 
+              whileTap={{ scale: 0.98 }} 
+              style={{ 
+                display: "flex", 
+                alignItems: "center", 
+                willChange: "transform",
+                position: "relative"
+              }}
+            >
+              <span style={{ 
+                fontWeight: 950, 
+                fontSize: "1.4rem", 
+                letterSpacing: "0.12em", 
+                textTransform: "uppercase",
+                fontFamily: '"Outfit", "Inter", sans-serif',
+                color: scrolled ? "var(--text-primary)" : "#ffffff",
+                display: "flex",
+                alignItems: "center",
+                textShadow: scrolled ? "none" : "0 2px 10px rgba(0,0,0,0.3)"
+              }}>
+                WEBIS
+              </span>
             </motion.div>
           </Link>
 
@@ -204,11 +217,17 @@ export default function Navbar() {
 
               {/* Header */}
               <div style={{ padding: "1.75rem 2rem", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                  <div style={{ position: "relative", width: "32px", height: "32px" }}>
-                    <Image src="/logo.png" alt="Logo" fill style={{ objectFit: "contain" }} priority />
-                  </div>
-                  <span style={{ fontWeight: 800, fontSize: "1.4rem", letterSpacing: "-0.03em", color: "var(--text-primary)" }}>Webis</span>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <span style={{ 
+                    fontWeight: 950, 
+                    fontSize: "1.4rem", 
+                    letterSpacing: "0.12em", 
+                    textTransform: "uppercase",
+                    fontFamily: '"Outfit", "Inter", sans-serif',
+                    color: "var(--text-primary)",
+                  }}>
+                    WEBIS
+                  </span>
                 </div>
                 <motion.button 
                   whileHover={{ scale: 1.1, rotate: 90 }}
@@ -267,14 +286,23 @@ export default function Navbar() {
               {/* Footer Section: Socials & Contact */}
               <div style={{ padding: "2rem", borderTop: "1px solid rgba(255,255,255,0.05)", background: "rgba(0,0,0,0.05)" }}>
                 <div style={{ display: "flex", justifyContent: "center", gap: "1rem", marginBottom: "1.5rem" }}>
-                  {[Link2, InstagramIcon, Send, Mail].map((Icon, idx) => (
+                  {[
+                    { src: "/insta.png", href: "https://www.instagram.com/webis001?igsh=MWcwMnhoaTk0bXF0dA%3D%3D&utm_source=qr" },
+                    { src: "/linkedin.png", href: "https://linkedin.com/company/webis" },
+                    { src: "/facebook.png", href: "https://facebook.com/webis" },
+                    { src: "/portfolio.png", href: "/#portfolio" },
+                  ].map((social, idx) => (
                     <motion.a 
                       key={idx}
-                      href="#"
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={{ y: -5, background: "rgba(255,255,255,0.1)" }}
-                      style={{ width: "45px", height: "45px", borderRadius: "100px", border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-primary)", transition: "all 0.3s" }}
+                      style={{ width: "50px", height: "50px", borderRadius: "100px", border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-primary)", transition: "all 0.3s", overflow: "hidden" }}
                     >
-                      <Icon size={20} />
+                      <div style={{ position: "relative", width: "22px", height: "22px" }}>
+                        <Image src={social.src} alt="Social" fill style={{ objectFit: "contain" }} />
+                      </div>
                     </motion.a>
                   ))}
                 </div>

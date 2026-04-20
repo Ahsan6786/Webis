@@ -22,10 +22,10 @@ export default function ScrollReveal({
   const shouldReduceMotion = useReducedMotion();
 
   const offsets: Record<string, { x: number; y: number }> = {
-    up: { x: 0, y: 32 },
-    down: { x: 0, y: -32 },
-    left: { x: 32, y: 0 },
-    right: { x: -32, y: 0 },
+    up: { x: 0, y: 20 },
+    down: { x: 0, y: -20 },
+    left: { x: 20, y: 0 },
+    right: { x: -20, y: 0 },
     none: { x: 0, y: 0 },
   };
 

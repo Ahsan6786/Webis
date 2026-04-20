@@ -1,17 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Building2, Code2, Layers, UtensilsCrossed } from "lucide-react";
+import { ArrowRight, Building2, Code2, Layers, UtensilsCrossed, MessageCircle } from "lucide-react";
 import { services } from "@/lib/data";
 import SectionHeading from "@/components/ui/SectionHeading";
 
-const iconMap: Record<string, React.ElementType> = { Building2, Layers, UtensilsCrossed, Code2 };
+const iconMap: Record<string, React.ElementType> = { Building2, Layers, UtensilsCrossed, Code2, MessageCircle };
 
 const cardAccents: Record<string, { from: string; to: string; hoverGlow: string }> = {
   business: { from: "#2563eb", to: "#1d4ed8", hoverGlow: "rgba(37, 99, 235, 0.25)" },
   portfolio: { from: "#7c3aed", to: "#6d28d9", hoverGlow: "rgba(124, 58, 237, 0.25)" },
   restaurant: { from: "#0ea5e9", to: "#0284c7", hoverGlow: "rgba(14, 165, 233, 0.25)" },
   webapp: { from: "#1e3a8a", to: "#1e40af", hoverGlow: "rgba(30, 58, 138, 0.25)" },
+  chatbot: { from: "#3b82f6", to: "#6366f1", hoverGlow: "rgba(59, 130, 246, 0.25)" },
 };
 
 function TimelineCard({ service, i }: { service: typeof services[0]; i: number }) {

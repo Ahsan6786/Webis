@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Code2, Palette, Rocket, Mouse } from "lucide-react";
+import { ArrowRight, Code2, Palette, Rocket, Mouse, Users } from "lucide-react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Magnetic from "@/components/animations/Magnetic";
 
 const GalaxyCanvas = dynamic(() => import("@/components/animations/GalaxyCanvas"), { ssr: false });
@@ -103,12 +104,12 @@ const TYPED_LINES = [
 ];
 
 /* ── Floating Item Component ── */
-function FloatingItem({ icon: Icon, delay = 0, x = 0, y = 0, scale = 1, rotation = 0 }: any) {
+function FloatingItem({ src, delay = 0, x = 0, y = 0, scale = 1, rotation = 0 }: { src: string, delay?: number, x?: number, y?: number, scale?: number, rotation?: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0 }}
       animate={{ 
-        opacity: [0.3, 0.6, 0.3],
+        opacity: [0.2, 0.4, 0.2],
         scale: [scale, scale * 1.05, scale],
         y: [y, y - 15, y],
         rotate: [rotation, rotation + 8, rotation - 8, rotation]
@@ -128,15 +129,19 @@ function FloatingItem({ icon: Icon, delay = 0, x = 0, y = 0, scale = 1, rotation
       }}
     >
       <div style={{
-        padding: "1rem",
+        padding: "0.8rem",
         borderRadius: "16px",
         background: "rgba(255, 255, 255, 0.03)",
         backdropFilter: "blur(12px)",
-        border: "1.5px solid rgba(255, 255, 255, 0.12)",
+        border: "1.5px solid rgba(255, 255, 255, 0.08)",
         boxShadow: "0 10px 40px rgba(0,0,0,0.3)",
-        color: "rgba(255,255,255,0.7)"
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
       }}>
-        <Icon size={24} />
+        <div style={{ position: "relative", width: "24px", height: "24px", opacity: 0.6 }}>
+          <Image src={src} alt="floating icon" fill style={{ objectFit: "contain" }} />
+        </div>
       </div>
     </motion.div>
   );
@@ -229,9 +234,9 @@ export default function Hero() {
       {/* ── Floating Interactive Elements ── */}
       {mounted && (
         <div style={{ position: "absolute", inset: 0, zIndex: 5, pointerEvents: "none" }}>
-          <FloatingItem icon={Code2} x={-420} y={-180} delay={0} scale={1.1} rotation={15} />
-          <FloatingItem icon={Palette} x={450} y={-100} delay={1.5} scale={1} rotation={-12} />
-          <FloatingItem icon={Rocket} x={-500} y={150} delay={3} scale={0.9} rotation={25} />
+          <FloatingItem src="/insta.png" x={-420} y={-180} delay={0} scale={1.1} rotation={15} />
+          <FloatingItem src="/linkedin.png" x={450} y={-100} delay={1.5} scale={1} rotation={-12} />
+          <FloatingItem src="/facebook.png" x={-500} y={150} delay={3} scale={0.9} rotation={25} />
         </div>
       )}
 
@@ -438,9 +443,43 @@ export default function Hero() {
               }}
               whileTap={{ scale: 0.98 }}
             >
-              <span style={{ position: "relative", zIndex: 1 }}>
+              <span style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                <div style={{ position: "relative", width: "18px", height: "18px" }}>
+                  <Image src="/portfolio.png" alt="Portfolio" fill style={{ objectFit: "contain" }} />
+                </div>
                 View Portfolio
               </span>
+            </motion.a>
+          </Magnetic>
+          
+          <Magnetic amount={0.1}>
+            <motion.a
+              href="/referral"
+              style={{ 
+                position: "relative",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "0.85rem", 
+                padding: "1.1rem 2.2rem", 
+                borderRadius: "100px",
+                color: "rgba(255,255,255,0.6)",
+                textDecoration: "none",
+                fontWeight: 700,
+                border: "1.5px solid rgba(255,255,255,0.08)",
+                transition: "all 0.3s ease",
+                background: "rgba(255, 255, 255, 0.02)",
+                backdropFilter: "blur(24px)",
+              }}
+              whileHover={{ 
+                scale: 1.05, 
+                borderColor: "rgba(255,255,255,0.2)",
+                background: "rgba(255,255,255,0.05)",
+                color: "#ffffff"
+              }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Users size={14} className="mr-2" /> Refer & Earn
             </motion.a>
           </Magnetic>
         </motion.div>

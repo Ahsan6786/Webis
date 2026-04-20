@@ -35,6 +35,14 @@ export const services = [
     icon: "Code2",
     gradient: "from-emerald-500 to-teal-400",
   },
+  {
+    id: "chatbot",
+    title: "AI & Chatbots",
+    description:
+      "Advanced AI chatbots that live on your site 24/7. From customer support to lead qualification, we mould AI to fit your business logic.",
+    icon: "MessageCircle",
+    gradient: "from-blue-400 to-indigo-500",
+  },
 ];
 
 export interface Project {

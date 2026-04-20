@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { Send, Link2, GitBranch, ArrowUpRight, Heart } from "lucide-react";
+import { Send, Link2, GitBranch, ArrowUpRight, Heart, Globe } from "lucide-react";
 
 const InstagramIcon = ({ size = 20 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
@@ -19,20 +19,18 @@ const footerLinks = {
   Company: [
     { label: "Portfolio",    href: "/#portfolio" },
     { label: "Pricing",     href: "/#pricing"   },
+    { label: "Refer & Earn", href: "/referral"  },
     { label: "Why Webis",   href: "/#why"       },
   ],
   Contact: [
     { label: "Get a Quote",    href: "/#contact" },
-    { label: "WhatsApp us",   href: "https://wa.me/919999999999", external: true },
+    { label: "WhatsApp us",   href: "https://wa.me/919162248786", external: true },
     { label: "mitraai0001@gmail.com",href: "mailto:mitraai0001@gmail.com", external: true },
   ],
 };
 
 const socials = [
-  { icon: InstagramIcon, href: "https://www.instagram.com/webis001?igsh=MWcwMnhoaTk0bXF0dA%3D%3D&utm_source=qr", label: "Instagram" },
-  { icon: Send,         href: "https://twitter.com",   label: "Twitter / X" },
-  { icon: Link2,        href: "https://linkedin.com",  label: "LinkedIn"  },
-  { icon: GitBranch,    href: "https://github.com",    label: "GitHub"    },
+  { icon: "/insta.png",     href: "https://www.instagram.com/webis001?igsh=MWcwMnhoaTk0bXF0dA%3D%3D&utm_source=qr", label: "Instagram" },
 ];
 
 export default function Footer() {
@@ -57,7 +55,7 @@ export default function Footer() {
               <div style={{ width: "38px", height: "38px", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
-                  src="/logo.png" 
+                  src="/logo.png?v=2" 
                   alt="Webis Digital Agency - Premium Web Development" 
                   style={{ width: "100%", height: "100%", objectFit: "contain" }} 
                 />
@@ -69,24 +67,26 @@ export default function Footer() {
               We don&apos;t build websites. We build experiences. Premium digital agency for the age of the internet.
             </p>
 
-            {/* Socials */}
-            <div style={{ display: "flex", gap: "0.5rem" }}>
-              {socials.map(({ icon: Icon, href, label }) => (
-                <motion.a
-                  key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
-                  whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.92 }}
-                  style={{
-                    width: "36px", height: "36px", borderRadius: "10px",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)",
-                    color: "rgba(255,255,255,0.4)", transition: "background 0.2s, color 0.2s",
-                  }}
-                  onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = "rgba(255,255,255,0.15)"; el.style.color = "#ffffff"; }}
-                  onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = "rgba(255,255,255,0.05)"; el.style.color = "rgba(255,255,255,0.4)"; }}
-                >
-                  <Icon size={15} />
-                </motion.a>
-              ))}
+            <div style={{ display: "flex", gap: "1rem" }}>
+              <motion.a 
+                href="https://www.instagram.com/webis001" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                whileHover={{ y: -5, scale: 1.1 }}
+                style={{ 
+                  color: "#ffffff", 
+                  width: "40px", height: "40px", 
+                  background: "rgba(255,255,255,0.05)", 
+                  borderRadius: "12px", 
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  transition: "all 0.3s ease"
+                }}
+              >
+                <div style={{ position: "relative", width: "18px", height: "18px" }}>
+                  <Image src="/insta.png" alt="Instagram" fill style={{ objectFit: "contain" }} />
+                </div>
+              </motion.a>
             </div>
           </div>
 

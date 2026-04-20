@@ -12,12 +12,15 @@ import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 
+import TheRealIssue from "@/components/sections/TheRealIssue";
+
 export default function Home() {
   return (
     <>
       <Navbar />
       <main>
         <Hero />
+        <TheRealIssue />
         <Services />
         <Portfolio />
         <Stats />
