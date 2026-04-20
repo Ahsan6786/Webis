@@ -342,7 +342,7 @@ export default function Contact() {
                   style={{ display: "flex", flexDirection: "column", gap: "1.5rem", padding: "1rem 0" }}
                 >
                   <div className="mb-4">
-                    <h3 style={{ fontWeight: 900, fontSize: "1.75rem", color: "var(--text-primary)", marginBottom: "0.5rem", tracking: "-0.02em" }}>
+                    <h3 style={{ fontWeight: 900, fontSize: "1.75rem", color: "var(--text-primary)", marginBottom: "0.5rem", letterSpacing: "-0.02em" }}>
                       Choose your channel.
                     </h3>
                     <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
