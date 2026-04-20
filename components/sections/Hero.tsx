@@ -274,28 +274,6 @@ export default function Hero() {
           fontFamily: '"Outfit", "Inter", sans-serif'
         }}
       >
-        {/* Top Tag */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          style={{
-            padding: "0.5rem 1rem",
-            borderRadius: "100px",
-            background: "rgba(255,255,255,0.03)",
-            backdropFilter: "blur(12px)",
-            border: "1.5px solid rgba(255,255,255,0.08)",
-            color: "rgba(255,255,255,0.6)",
-            fontSize: "0.8rem",
-            fontWeight: 700,
-            textTransform: "uppercase",
-            letterSpacing: "0.15em",
-            marginBottom: "3rem",
-            boxShadow: "0 4px 20px rgba(0,0,0,0.2)"
-          }}
-        >
-          Webis &mdash; The New Standard
-        </motion.div>
 
         {/* Visually hidden SEO keywords for Google indexing */}
         <h2 style={{ 
