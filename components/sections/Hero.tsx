@@ -7,7 +7,10 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Magnetic from "@/components/animations/Magnetic";
 
-const GalaxyCanvas = dynamic(() => import("@/components/animations/GalaxyCanvas"), { ssr: false });
+const GalaxyCanvas = dynamic(() => import("@/components/animations/GalaxyCanvas"), { 
+  ssr: false,
+  loading: () => <div style={{ position: "absolute", inset: 0, background: "#000" }} />
+});
 
 /* ── Ultra Smooth Fast Typewriter hook ── */
 function useTypewriter(lines: string[], cps = 120, pauseMs = 1200) {

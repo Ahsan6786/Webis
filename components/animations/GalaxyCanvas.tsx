@@ -1,4 +1,5 @@
 "use client";
+// Space-optimized Galaxy Background
 
 import { useEffect, useRef } from "react";
 
