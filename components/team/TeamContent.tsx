@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { teamMembers } from "@/lib/data";
 import ScrollReveal from "@/components/animations/ScrollReveal";
-import { CheckCircle2, Link2, Mail, ArrowRight, Camera, CircleCheck } from "lucide-react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
