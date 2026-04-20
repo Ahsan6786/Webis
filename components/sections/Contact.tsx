@@ -104,7 +104,7 @@ export default function Contact() {
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
 
     setLoading(true);
-    
+
     try {
       // Background save to Firestore for safety
       await addDoc(collection(db, "contact_leads"), {
@@ -112,7 +112,7 @@ export default function Contact() {
         createdAt: serverTimestamp(),
         method: "pending_choice"
       });
-      
+
       setShowOptions(true);
     } catch (error) {
       console.error("Error saving lead:", error);
@@ -209,7 +209,7 @@ export default function Contact() {
                   whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(0,0,0,0.08)" }}
                 >
                   <div style={{
-                    width: "52px", height: "52px", borderRadius: "14px", 
+                    width: "52px", height: "52px", borderRadius: "14px",
                     background: `linear-gradient(135deg, ${item.color}20, ${item.color}10)`,
                     display: "flex", alignItems: "center", justifyContent: "center", color: item.color,
                     boxShadow: `0 4px 12px ${item.color}15`,
@@ -322,7 +322,7 @@ export default function Contact() {
                   <div style={{ width: "80px", height: "80px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.3)", marginBottom: "1rem" }}>
                     <CheckCircle size={40} color="#22c55e" />
                   </div>
-                  <h3 style={{ fontWeight: 900, fontSize: "2rem", color: "var(--text-primary)", margin: 0, tracking: "-0.04em" }}>
+                  <h3 style={{ fontWeight: 900, fontSize: "2rem", color: "var(--text-primary)", margin: 0, letterSpacing: "-0.04em" }}>
                     Request Received.
                   </h3>
                   <p style={{ color: "var(--text-secondary)", fontSize: "1.1rem", maxWidth: "400px", lineHeight: 1.6 }}>
@@ -389,7 +389,7 @@ export default function Contact() {
                     </Magnetic>
                   </div>
 
-                  <button 
+                  <button
                     onClick={() => setShowOptions(false)}
                     className="mt-4 text-slate-400 font-bold hover:text-slate-900 transition-colors text-sm"
                   >
