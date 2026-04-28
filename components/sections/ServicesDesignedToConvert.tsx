@@ -20,7 +20,32 @@ import {
   Users
 } from "lucide-react";
 
-const SERVICES = [
+interface ServiceTheme {
+  primary: string;
+  bg: string;
+  gradient: string;
+}
+
+interface ServiceStat {
+  label: string;
+  value: string;
+  icon: React.ReactNode;
+}
+
+interface Service {
+  id: string;
+  name: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  longDescription: string;
+  benefits: string[];
+  stats: ServiceStat[];
+  icon: React.ReactNode;
+  theme: ServiceTheme;
+}
+
+const SERVICES: Service[] = [
   {
     id: "business",
     name: "Business",
@@ -118,8 +143,14 @@ const SERVICES = [
   }
 ];
 
-function ServiceCard({ service, index, onInView }) {
-  const ref = useRef(null);
+interface ServiceCardProps {
+  service: Service;
+  index: number;
+  onInView: (service: Service) => void;
+}
+
+function ServiceCard({ service, index, onInView }: ServiceCardProps) {
+  const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { margin: "-45% 0px -45% 0px" });
 
   useEffect(() => {
@@ -196,8 +227,8 @@ function ServiceCard({ service, index, onInView }) {
 }
 
 export default function ServicesStorytelling() {
-  const [activeService, setActiveService] = useState(SERVICES[0]);
-  const containerRef = useRef(null);
+  const [activeService, setActiveService] = useState<Service>(SERVICES[0]);
+  const containerRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
