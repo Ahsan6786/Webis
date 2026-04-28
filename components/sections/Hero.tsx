@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Magnetic from "@/components/animations/Magnetic";
 
-const GalaxyCanvas = dynamic(() => import("@/components/animations/GalaxyCanvas"), { 
+const GalaxyCanvas = dynamic(() => import("@/components/animations/GalaxyCanvas"), {
   ssr: false,
   loading: () => <div style={{ position: "absolute", inset: 0, background: "#000" }} />
 });
@@ -15,14 +15,14 @@ const GalaxyCanvas = dynamic(() => import("@/components/animations/GalaxyCanvas"
 /* ── Ultra Smooth Fast Typewriter hook ── */
 function useTypewriter(lines: string[], cps = 120, pauseMs = 1200) {
   const [displayLines, setDisplayLines] = useState<string[]>(lines.map(() => ""));
-  
+
   useEffect(() => {
     let rafId: number;
     let lastTime = performance.now();
     let currentLine = 0;
     let currentChar = 0;
     let pauseUntil = 0;
-    
+
     const msPerChar = 1000 / cps;
 
     const tick = (now: number) => {
@@ -31,26 +31,26 @@ function useTypewriter(lines: string[], cps = 120, pauseMs = 1200) {
         rafId = requestAnimationFrame(tick);
         return;
       }
-      
+
       const target = lines[currentLine];
       let delta = now - lastTime;
-      
+
       if (delta >= msPerChar) {
         const charsToAdd = Math.floor(delta / msPerChar);
         currentChar += charsToAdd;
         // Don't accumulate too much lag
         lastTime += charsToAdd * msPerChar;
-        
+
         if (currentChar > target.length) {
           currentChar = target.length;
         }
-        
+
         setDisplayLines(prev => {
           const next = [...prev];
           next[currentLine] = target.slice(0, currentChar);
           return next;
         });
-        
+
         if (currentChar >= target.length) {
           if (currentLine < lines.length - 1) {
             currentLine++;
@@ -63,7 +63,7 @@ function useTypewriter(lines: string[], cps = 120, pauseMs = 1200) {
       }
       rafId = requestAnimationFrame(tick);
     };
-    
+
     rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
   }, [lines, cps, pauseMs]);
@@ -111,17 +111,17 @@ function FloatingItem({ src, delay = 0, x = 0, y = 0, scale = 1, rotation = 0 }:
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0 }}
-      animate={{ 
+      animate={{
         opacity: [0.2, 0.4, 0.2],
         scale: [scale, scale * 1.05, scale],
         y: [y, y - 15, y],
         rotate: [rotation, rotation + 8, rotation - 8, rotation]
       }}
-      transition={{ 
-        duration: 8, 
-        repeat: Infinity, 
-        delay, 
-        ease: "easeInOut" 
+      transition={{
+        duration: 8,
+        repeat: Infinity,
+        delay,
+        ease: "easeInOut"
       }}
       style={{
         position: "absolute",
@@ -157,12 +157,12 @@ export default function Hero() {
   const pos = useRef({ x: 0, y: 0 });
   const raf = useRef<number | null>(null);
 
-  const typed = useTypewriter(TYPED_LINES, 30, 1200);
+  const typed = useTypewriter(TYPED_LINES, 80, 800);
 
   useEffect(() => {
     setMounted(true);
-    const onMove = (e: MouseEvent) => { 
-      pos.current = { x: e.clientX, y: e.clientY }; 
+    const onMove = (e: MouseEvent) => {
+      pos.current = { x: e.clientX, y: e.clientY };
       if (spotlightRef.current) {
         spotlightRef.current.style.setProperty("--x", `${e.clientX}px`);
         spotlightRef.current.style.setProperty("--y", `${e.clientY}px`);
@@ -208,9 +208,9 @@ export default function Hero() {
       }}
     >
       {/* ── Interactive Spotlight Glow ── */}
-      <div 
+      <div
         ref={spotlightRef}
-        aria-hidden 
+        aria-hidden
         style={{
           position: "absolute",
           inset: 0,
@@ -221,8 +221,8 @@ export default function Hero() {
       />
 
       {/* ── Nebula Glow (Blue & Purple) ── */}
-      <div 
-        aria-hidden 
+      <div
+        aria-hidden
         style={{
           position: "absolute",
           inset: 0,
@@ -276,16 +276,16 @@ export default function Hero() {
       >
 
         {/* Visually hidden SEO keywords for Google indexing */}
-        <h2 style={{ 
-          position: "absolute", 
-          width: "1px", 
-          height: "1px", 
-          padding: "0", 
-          margin: "-1px", 
-          overflow: "hidden", 
-          clip: "rect(0, 0, 0, 0)", 
-          whiteSpace: "nowrap", 
-          borderWidth: "0" 
+        <h2 style={{
+          position: "absolute",
+          width: "1px",
+          height: "1px",
+          padding: "0",
+          margin: "-1px",
+          overflow: "hidden",
+          clip: "rect(0, 0, 0, 0)",
+          whiteSpace: "nowrap",
+          borderWidth: "0"
         }}>
           Best website developer in Pune, top website maker in India, premium web development agency in Pune.
         </h2>
@@ -328,8 +328,26 @@ export default function Hero() {
                 transition: "opacity 0.6s ease"
               }}
             >
-              {typed[1] || "Placeholder"} 
-              {!allDone && typed[1] && <Cursor />}
+              {typed[1] || "Placeholder"}
+              {typed[1] && typed[2] === "" && <Cursor />}
+            </span>
+
+            {/* Line 3 — extra phrase */}
+            <span
+              style={{
+                display: "block",
+                minHeight: "1.1em",
+                fontSize: "0.35em",
+                fontWeight: 600,
+                color: "rgba(255,255,255,0.5)",
+                visibility: typed[2] ? "visible" : "hidden",
+                opacity: typed[2] ? 1 : 0,
+                transition: "opacity 0.6s ease",
+                marginTop: "-0.5rem"
+              }}
+            >
+              {typed[2]}
+              {allDone && <Cursor />}
             </span>
           </h1>
         </motion.div>
@@ -353,14 +371,14 @@ export default function Hero() {
         </motion.p>
 
         {/* CTA — fade */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: allDone ? 1 : 0, y: allDone ? 0 : 30 }}
           transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-          style={{ 
-            display: "flex", 
-            flexWrap: "wrap", 
-            gap: "1.25rem", 
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "1.25rem",
             justifyContent: "center",
             marginTop: "3.5rem"
           }}
@@ -369,14 +387,14 @@ export default function Hero() {
             <motion.a
               href="/#contact"
               className="btn btn-white"
-              style={{ 
+              style={{
                 position: "relative",
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: "1rem", 
+                fontSize: "1rem",
                 padding: "1.1rem 3.2rem",
-                gap: "0.75rem", 
+                gap: "0.75rem",
                 borderRadius: "100px",
                 overflow: "hidden",
                 border: "1.5px solid rgba(255,255,255,0.2)",
@@ -398,13 +416,13 @@ export default function Hero() {
             <motion.a
               href="/#portfolio"
               className="glass-panel"
-              style={{ 
+              style={{
                 position: "relative",
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: "1rem", 
-                padding: "1.1rem 3.2rem", 
+                fontSize: "1rem",
+                padding: "1.1rem 3.2rem",
                 borderRadius: "100px",
                 color: "white",
                 textDecoration: "none",
@@ -416,11 +434,11 @@ export default function Hero() {
                 backdropFilter: "blur(24px)",
                 boxShadow: "inset 0 0 16px rgba(255, 255, 255, 0.05)"
               }}
-              whileHover={{ 
-                scale: 1.05, 
-                y: -4, 
+              whileHover={{
+                scale: 1.05,
+                y: -4,
                 background: "rgba(255,255,255,0.08)",
-                boxShadow: "0 20px 60px rgba(255,255,255,0.05)" 
+                boxShadow: "0 20px 60px rgba(255,255,255,0.05)"
               }}
               whileTap={{ scale: 0.98 }}
             >
@@ -432,17 +450,17 @@ export default function Hero() {
               </span>
             </motion.a>
           </Magnetic>
-          
+
           <Magnetic amount={0.1}>
             <motion.a
               href="/referral"
-              style={{ 
+              style={{
                 position: "relative",
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: "0.85rem", 
-                padding: "1.1rem 2.2rem", 
+                fontSize: "0.85rem",
+                padding: "1.1rem 2.2rem",
                 borderRadius: "100px",
                 color: "rgba(255,255,255,0.6)",
                 textDecoration: "none",
@@ -452,8 +470,8 @@ export default function Hero() {
                 background: "rgba(255, 255, 255, 0.02)",
                 backdropFilter: "blur(24px)",
               }}
-              whileHover={{ 
-                scale: 1.05, 
+              whileHover={{
+                scale: 1.05,
                 borderColor: "rgba(255,255,255,0.2)",
                 background: "rgba(255,255,255,0.05)",
                 color: "#ffffff"

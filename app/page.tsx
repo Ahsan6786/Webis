@@ -1,7 +1,7 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
-import Services from "@/components/sections/Services";
+import ServicesDesignedToConvert from "@/components/sections/ServicesDesignedToConvert";
 import Portfolio from "@/components/sections/Portfolio";
 import Stats from "@/components/sections/Stats";
 import WhyWebis from "@/components/sections/WhyWebis";
@@ -21,7 +21,7 @@ export default function Home() {
       <main>
         <Hero />
         <TheRealIssue />
-        <Services />
+        <ServicesDesignedToConvert />
         <Portfolio />
         <Stats />
         <WhyWebis />
